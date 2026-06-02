@@ -1,0 +1,609 @@
+import type { ApiEntry, ApiLink, RelatedApi } from "./api-directory-types";
+import type { ApiCategory, ApiEcosystem } from "./api-directory-types";
+import type { ApiToolType } from "./api-directory-types";
+import type { ApiTag } from "./api-directory-constants";
+
+type ApiInput = {
+  slug: string;
+  name: string;
+  description: string;
+  purpose: string;
+  overview?: string;
+  problemSolved?: string;
+  commonUses?: string[];
+  useCases?: string[];
+  buildIdeas?: string[];
+  whatCanYouBuild?: string[];
+  popularRecipes: string[];
+  relatedApis?: RelatedApi[];
+  similarTools?: RelatedApi[];
+  categories: ApiCategory[];
+  ecosystems: ApiEcosystem[];
+  tags?: ApiTag[];
+  isOpenSource: boolean;
+  isFree: boolean;
+  isFreemium: boolean;
+  hasGrantProgram: boolean;
+  hasApiAvailable?: boolean;
+  hasSdkAvailable?: boolean;
+  isHackathonFriendly?: boolean;
+  grantInfo?: string | null;
+  links?: ApiLink[];
+  url: string;
+  githubUrl?: string | null;
+  docsUrl?: string | null;
+  updatedAt?: string;
+  toolType?: ApiToolType;
+};
+
+const TOOL_TYPE_BY_SLUG: Record<string, ApiToolType> = {
+  privy: "platform",
+  hyperliquid: "protocol",
+  pyth: "protocol",
+  telegram: "api",
+  alchemy: "platform",
+  stripe: "platform",
+  plaid: "platform",
+  walletconnect: "protocol",
+  "the-graph": "protocol",
+  ollama: "platform",
+  huggingface: "platform",
+  supabase: "platform",
+  litellm: "api",
+  immunefi: "service",
+  chainalysis: "service",
+  dune: "platform",
+  rainbowkit: "sdk",
+  marble: "platform",
+  rain: "platform",
+  circle: "platform",
+};
+
+function inferToolType(input: ApiInput): ApiToolType {
+  return input.toolType ?? TOOL_TYPE_BY_SLUG[input.slug] ?? "api";
+}
+
+function findDocsUrl(links: ApiLink[], explicit?: string | null) {
+  if (explicit) return explicit;
+
+  return (
+    links.find((link) =>
+      /doc|documentation|api docs|developer/i.test(link.label),
+    )?.url ?? null
+  );
+}
+
+function inferSdkAvailable(links: ApiLink[], categories: ApiCategory[]) {
+  if (links.some((link) => /sdk|developer|api docs|documentation/i.test(link.label))) {
+    return true;
+  }
+
+  return categories.some((category) =>
+    ["infrastructure", "wallets", "authentication", "ai", "data"].includes(
+      category,
+    ),
+  );
+}
+
+function defineApi(input: ApiInput): ApiEntry {
+  const links: ApiLink[] = input.links ?? [{ label: "Website", url: input.url }];
+  if (input.githubUrl && !links.some((l) => l.label === "GitHub")) {
+    links.push({ label: "GitHub", url: input.githubUrl });
+  }
+
+  const buildIdeas = input.buildIdeas ?? input.popularRecipes;
+  const whatCanYouBuild = input.whatCanYouBuild ?? buildIdeas;
+  const docsUrl = findDocsUrl(links, input.docsUrl);
+
+  return {
+    slug: input.slug,
+    name: input.name,
+    description: input.description,
+    purpose: input.purpose,
+    overview: input.overview ?? input.purpose,
+    problemSolved:
+      input.problemSolved ??
+      `Teams need reliable ${input.name} infrastructure without building it from scratch.`,
+    commonUses: input.commonUses ?? input.useCases ?? [],
+    useCases: input.useCases ?? input.commonUses ?? [],
+    buildIdeas,
+    whatCanYouBuild,
+    popularRecipes: input.popularRecipes,
+    relatedApis: input.relatedApis ?? [],
+    similarTools: input.similarTools ?? [],
+    categories: input.categories,
+    ecosystems: input.ecosystems,
+    tags: input.tags ?? [],
+    toolType: inferToolType(input),
+    isOpenSource: input.isOpenSource,
+    isFree: input.isFree,
+    isFreemium: input.isFreemium,
+    hasGrantProgram: input.hasGrantProgram,
+    hasApiAvailable: input.hasApiAvailable ?? true,
+    hasSdkAvailable:
+      input.hasSdkAvailable ?? inferSdkAvailable(links, input.categories),
+    isHackathonFriendly:
+      input.isHackathonFriendly ??
+      (input.isOpenSource || input.hasGrantProgram),
+    grantInfo:
+      input.grantInfo ??
+      (input.hasGrantProgram
+        ? "Grant program available for eligible builders."
+        : null),
+    links,
+    url: input.url,
+    githubUrl: input.githubUrl ?? null,
+    docsUrl,
+    updatedAt: input.updatedAt ?? "2026-05-20",
+  };
+}
+
+export const apiDirectory: ApiEntry[] = [
+  defineApi({
+    slug: "privy",
+    name: "Privy",
+    description: "Wallet onboarding and embedded wallet infrastructure for apps.",
+    purpose: "Wallet onboarding and authentication.",
+    problemSolved:
+      "Apps need wallet login and embedded wallets without building key management in-house.",
+    useCases: [
+      "Embedded wallets in consumer apps",
+      "Email + wallet hybrid login",
+      "Account abstraction onboarding flows",
+    ],
+    buildIdeas: ["SocialFi app", "NFT marketplace", "Trading platform"],
+    whatCanYouBuild: [
+      "Wallet Login",
+      "Embedded Wallet Apps",
+      "Trading Platforms",
+      "SocialFi Apps",
+      "NFT Marketplaces",
+    ],
+    popularRecipes: ["Trading platform", "NFT marketplace", "SocialFi app"],
+    relatedApis: [
+      { slug: "rainbowkit", name: "RainbowKit" },
+      { slug: "walletconnect", name: "WalletConnect" },
+      { slug: "alchemy", name: "Alchemy" },
+    ],
+    similarTools: [
+      { name: "Dynamic", url: "https://www.dynamic.xyz" },
+      { name: "Turnkey", url: "https://www.turnkey.com" },
+      { name: "Web3Auth", url: "https://web3auth.io" },
+    ],
+    categories: ["authentication", "wallets", "identity"],
+    tags: [
+      "Wallet Login",
+      "Embedded Wallets",
+      "Social Login",
+      "Account Abstraction",
+      "Passkeys",
+    ],
+    ecosystems: ["Ethereum", "Base", "Solana", "Multi-chain"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: false,
+    grantInfo: null,
+    links: [
+      { label: "Website", url: "https://privy.io" },
+      { label: "Documentation", url: "https://docs.privy.io" },
+    ],
+    url: "https://privy.io",
+    docsUrl: "https://docs.privy.io",
+    updatedAt: "2026-05-28",
+  }),
+  defineApi({
+    slug: "hyperliquid",
+    name: "Hyperliquid",
+    description: "High-performance perpetuals exchange with public API.",
+    purpose: "Perpetual futures trading and market data.",
+    overview: "Perpetual futures trading infrastructure.",
+    problemSolved:
+      "Developers need low-latency perps trading APIs without operating exchange infrastructure.",
+    useCases: [
+      "Retail trading frontends",
+      "Automated market-making bots",
+      "Portfolio dashboards with live positions",
+    ],
+    buildIdeas: [
+      "Trading platform",
+      "Trading bot",
+      "Copy trading",
+      "AI trader",
+      "Portfolio tracker",
+    ],
+    whatCanYouBuild: [
+      "Trading Platform",
+      "Trading Bot",
+      "Copy Trading",
+      "Portfolio Tracker",
+      "AI Trader",
+    ],
+    popularRecipes: [
+      "Trading platform",
+      "Portfolio dashboard",
+      "Market maker bot",
+    ],
+    relatedApis: [
+      { slug: "privy", name: "Privy" },
+      { slug: "pyth", name: "Pyth" },
+      { slug: "telegram", name: "Telegram" },
+    ],
+    similarTools: [
+      { name: "Drift", url: "https://www.drift.trade" },
+      { name: "Vertex", url: "https://vertexprotocol.com" },
+      { name: "dYdX", url: "https://dydx.exchange" },
+    ],
+    categories: ["trading", "data", "analytics"],
+    tags: [
+      "Perps",
+      "Trading API",
+      "Market Data",
+      "Trading Bots",
+      "Copy Trading",
+      "Grants",
+    ],
+    ecosystems: ["Hyperliquid", "Multi-chain"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: true,
+    grantInfo:
+      "Hyperliquid builder grants support teams shipping trading tools and ecosystem apps on Hyperliquid.",
+    links: [
+      { label: "Website", url: "https://hyperliquid.xyz" },
+      { label: "API Docs", url: "https://hyperliquid.gitbook.io" },
+    ],
+    url: "https://hyperliquid.xyz",
+    updatedAt: "2026-05-30",
+  }),
+  defineApi({
+    slug: "pyth",
+    name: "Pyth",
+    description: "High-fidelity oracle network for real-time price feeds.",
+    purpose: "On-chain and off-chain price data for DeFi and trading apps.",
+    useCases: [
+      "Perpetuals mark pricing",
+      "Lending protocol collateral feeds",
+      "Trading bot signal inputs",
+    ],
+    buildIdeas: ["Trading bot", "DeFi lending app", "Portfolio tracker"],
+    popularRecipes: ["Trading platform", "DeFi dashboard"],
+    relatedApis: [
+      { slug: "hyperliquid", name: "Hyperliquid" },
+      { slug: "alchemy", name: "Alchemy" },
+    ],
+    categories: ["data", "trading", "infrastructure"],
+    tags: ["Oracles", "Market Data", "Grants"],
+    ecosystems: ["Ethereum", "Solana", "Sui", "Aptos", "Multi-chain"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: true,
+    grantInfo: "Pyth grants support integrations publishing or consuming price feeds.",
+    url: "https://pyth.network",
+    links: [
+      { label: "Website", url: "https://pyth.network" },
+      { label: "Documentation", url: "https://docs.pyth.network" },
+    ],
+  }),
+  defineApi({
+    slug: "telegram",
+    name: "Telegram",
+    description: "Bot API for alerts, trading signals, and user notifications.",
+    purpose: "Messaging layer for bots, alerts, and community tools.",
+    useCases: [
+      "Trade alert bots",
+      "Copy-trading signal delivery",
+      "Community moderation bots",
+    ],
+    buildIdeas: ["Trading bot", "Copy trading", "Community trading desk"],
+    popularRecipes: ["Trading bot", "AI trader"],
+    relatedApis: [{ slug: "hyperliquid", name: "Hyperliquid" }],
+    categories: ["infrastructure", "analytics"],
+    tags: ["Trading Bots", "Market Data"],
+    ecosystems: ["Chain-agnostic"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: false,
+    hasGrantProgram: false,
+    url: "https://telegram.org",
+    links: [
+      { label: "Bot API", url: "https://core.telegram.org/bots/api" },
+      { label: "Documentation", url: "https://core.telegram.org/bots" },
+    ],
+  }),
+  defineApi({
+    slug: "alchemy",
+    name: "Alchemy",
+    description: "Blockchain node infrastructure and developer APIs.",
+    purpose: "RPC, indexing, and Web3 infrastructure.",
+    commonUses: ["Node access", "NFT APIs", "Transaction simulation"],
+    popularRecipes: ["Trading platform", "NFT marketplace", "DeFi dashboard"],
+    relatedApis: [
+      { slug: "the-graph", name: "The Graph" },
+      { slug: "privy", name: "Privy" },
+    ],
+    categories: ["infrastructure", "data", "analytics"],
+    tags: ["RPC", "Indexing"],
+    ecosystems: ["Ethereum", "Base", "Arbitrum", "Optimism", "Avalanche"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: true,
+    url: "https://www.alchemy.com",
+  }),
+  defineApi({
+    slug: "stripe",
+    name: "Stripe",
+    description: "Payment processing and financial infrastructure APIs.",
+    purpose: "Accept payments and manage billing.",
+    commonUses: ["Checkout", "Subscriptions", "Connect payouts"],
+    popularRecipes: ["Payroll app", "Crypto neobank", "SaaS billing"],
+    relatedApis: [{ slug: "plaid", name: "Plaid" }],
+    categories: ["payments", "banking", "compliance"],
+    tags: ["Payments", "On/Off Ramp", "Treasury"],
+    ecosystems: ["Chain-agnostic"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: false,
+    url: "https://stripe.com",
+  }),
+  defineApi({
+    slug: "plaid",
+    name: "Plaid",
+    description: "Bank account linking and financial data APIs.",
+    purpose: "Connect apps to users' bank accounts.",
+    commonUses: ["Account linking", "Balance checks", "Transaction history"],
+    popularRecipes: ["Crypto neobank", "Payroll app", "Personal finance app"],
+    relatedApis: [{ slug: "stripe", name: "Stripe" }],
+    categories: ["banking", "data", "compliance"],
+    tags: ["KYC", "AML", "Banking"],
+    ecosystems: ["Chain-agnostic"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: false,
+    url: "https://plaid.com",
+  }),
+  defineApi({
+    slug: "walletconnect",
+    name: "WalletConnect",
+    description: "Open protocol connecting wallets to decentralized applications.",
+    purpose: "Wallet-to-dApp connection and signing.",
+    commonUses: ["Wallet login", "Mobile wallet pairing", "Multi-chain sessions"],
+    popularRecipes: ["Wallet login system", "DeFi dashboard", "NFT marketplace"],
+    relatedApis: [
+      { slug: "rainbowkit", name: "RainbowKit" },
+      { slug: "privy", name: "Privy" },
+    ],
+    categories: ["authentication", "wallets"],
+    tags: ["Wallet Login", "Passkeys"],
+    ecosystems: ["Ethereum", "Base", "Arbitrum", "Optimism", "Multi-chain"],
+    isOpenSource: true,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: true,
+    githubUrl: "https://github.com/WalletConnect",
+    url: "https://walletconnect.com",
+  }),
+  defineApi({
+    slug: "the-graph",
+    name: "The Graph",
+    description: "Decentralized indexing for querying blockchain data via GraphQL.",
+    purpose: "On-chain data indexing and subgraph queries.",
+    commonUses: ["Subgraph deployment", "Token analytics", "Protocol dashboards"],
+    popularRecipes: ["Trading platform", "DeFi dashboard", "Governance portal"],
+    relatedApis: [{ slug: "alchemy", name: "Alchemy" }],
+    categories: ["data", "infrastructure", "analytics"],
+    tags: ["Indexing", "Analytics"],
+    ecosystems: ["Ethereum", "Arbitrum", "Polygon", "Optimism"],
+    isOpenSource: true,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: true,
+    githubUrl: "https://github.com/graphprotocol",
+    url: "https://thegraph.com",
+  }),
+  defineApi({
+    slug: "ollama",
+    name: "Ollama",
+    description: "Run large language models locally with a simple API.",
+    purpose: "Local LLM inference without cloud dependencies.",
+    commonUses: ["Chat completions", "Code generation", "Embeddings"],
+    popularRecipes: ["AI agent", "Support bot", "Code assistant"],
+    relatedApis: [{ slug: "litellm", name: "LiteLLM" }],
+    categories: ["ai", "infrastructure"],
+    tags: ["AI Agents"],
+    ecosystems: ["Chain-agnostic"],
+    isOpenSource: true,
+    isFree: true,
+    isFreemium: false,
+    hasGrantProgram: false,
+    githubUrl: "https://github.com/ollama/ollama",
+    url: "https://ollama.com",
+  }),
+  defineApi({
+    slug: "huggingface",
+    name: "Hugging Face",
+    description: "Model hosting, inference APIs, and ML community hub.",
+    purpose: "Deploy and run open ML models via API.",
+    commonUses: ["Model inference", "Fine-tuning", "Dataset hosting"],
+    popularRecipes: ["AI agent", "Content moderation", "Semantic search"],
+    categories: ["ai", "data", "infrastructure"],
+    tags: ["AI Agents", "Analytics"],
+    ecosystems: ["Chain-agnostic"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: true,
+    url: "https://huggingface.co",
+  }),
+  defineApi({
+    slug: "supabase",
+    name: "Supabase",
+    description: "Open-source Firebase alternative with Postgres and auth.",
+    purpose: "Backend database, auth, and storage for apps.",
+    commonUses: ["User auth", "Realtime data", "File storage"],
+    popularRecipes: ["SocialFi app", "Bug bounty platform", "SaaS dashboard"],
+    categories: ["authentication", "infrastructure", "identity"],
+    tags: ["Social Login", "Passkeys"],
+    ecosystems: ["Chain-agnostic"],
+    isOpenSource: true,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: false,
+    githubUrl: "https://github.com/supabase/supabase",
+    url: "https://supabase.com",
+  }),
+  defineApi({
+    slug: "litellm",
+    name: "LiteLLM",
+    description: "Unified API proxy for 100+ LLM providers.",
+    purpose: "Single interface for multi-provider LLM calls.",
+    commonUses: ["Model routing", "Fallback chains", "Usage tracking"],
+    popularRecipes: ["AI agent", "Chat app", "Code assistant"],
+    relatedApis: [{ slug: "ollama", name: "Ollama" }],
+    categories: ["ai", "infrastructure"],
+    tags: ["AI Agents"],
+    ecosystems: ["Chain-agnostic"],
+    isOpenSource: true,
+    isFree: true,
+    isFreemium: false,
+    hasGrantProgram: false,
+    githubUrl: "https://github.com/BerriAI/litellm",
+    url: "https://docs.litellm.ai",
+  }),
+  defineApi({
+    slug: "immunefi",
+    name: "Immunefi",
+    description: "Bug bounty and audit platform for Web3 protocols.",
+    purpose: "Security research coordination and bounty payouts.",
+    commonUses: ["Bug bounty programs", "Audit contests", "Vulnerability disclosure"],
+    popularRecipes: ["Bug bounty platform", "DeFi protocol launch", "Security ops"],
+    categories: ["bug-bounty", "security", "compliance"],
+    tags: ["Bug Bounty", "Hackathons"],
+    ecosystems: ["Ethereum", "Multi-chain"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: false,
+    url: "https://immunefi.com",
+  }),
+  defineApi({
+    slug: "chainalysis",
+    name: "Chainalysis",
+    description: "Blockchain analytics and compliance screening tools.",
+    purpose: "Transaction monitoring and risk assessment.",
+    commonUses: ["Sanctions screening", "Fraud detection", "Compliance reporting"],
+    popularRecipes: ["Crypto neobank", "Exchange compliance", "Institutional custody"],
+    categories: ["compliance", "analytics", "security"],
+    tags: ["AML", "KYC"],
+    ecosystems: ["Ethereum", "Multi-chain"],
+    isOpenSource: false,
+    isFree: false,
+    isFreemium: true,
+    hasGrantProgram: false,
+    url: "https://www.chainalysis.com",
+  }),
+  defineApi({
+    slug: "dune",
+    name: "Dune Analytics",
+    description: "Community-driven blockchain analytics and SQL queries.",
+    purpose: "On-chain data analysis and dashboard building.",
+    commonUses: ["Protocol metrics", "Wallet analytics", "Market dashboards"],
+    popularRecipes: ["Trading platform", "DeFi dashboard", "Token launch analytics"],
+    categories: ["analytics", "data"],
+    tags: ["Analytics", "Market Data", "Indexing"],
+    ecosystems: ["Ethereum", "Base", "Polygon", "Optimism", "Avalanche", "Multi-chain"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: true,
+    url: "https://dune.com",
+  }),
+  defineApi({
+    slug: "rainbowkit",
+    name: "RainbowKit",
+    description: "React wallet connection library with polished UX.",
+    purpose: "Wallet connection UI for dApps.",
+    commonUses: ["Wallet login", "Multi-wallet support", "Chain switching"],
+    popularRecipes: ["Wallet login system", "NFT marketplace", "DeFi dashboard"],
+    relatedApis: [
+      { slug: "walletconnect", name: "WalletConnect" },
+      { slug: "privy", name: "Privy" },
+    ],
+    categories: ["wallets", "authentication"],
+    tags: ["Wallet Login", "Embedded Wallets"],
+    ecosystems: ["Ethereum", "Base", "Arbitrum", "Optimism", "Polygon"],
+    isOpenSource: true,
+    isFree: true,
+    isFreemium: false,
+    hasGrantProgram: false,
+    githubUrl: "https://github.com/rainbow-me/rainbowkit",
+    url: "https://rainbowkit.com",
+  }),
+  defineApi({
+    slug: "marble",
+    name: "Marble",
+    description: "Card issuing and payment card infrastructure APIs.",
+    purpose: "Virtual and physical card programs.",
+    commonUses: ["Card issuing", "Spend controls", "Cardholder KYC"],
+    popularRecipes: ["Crypto neobank", "Payroll app", "Treasury management"],
+    categories: ["cards", "payments", "banking"],
+    tags: ["Card Issuing", "Virtual Cards", "Payroll"],
+    ecosystems: ["Chain-agnostic"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: false,
+    url: "https://www.marble.xyz",
+  }),
+  defineApi({
+    slug: "rain",
+    name: "Rain",
+    description: "Card issuing and payment infrastructure for crypto-native apps.",
+    purpose: "Virtual and physical cards backed by stablecoin treasuries.",
+    commonUses: ["Card programs", "Spend from crypto balances", "Treasury management"],
+    popularRecipes: ["Crypto neobank", "Payroll app"],
+    relatedApis: [
+      { slug: "circle", name: "Circle" },
+      { slug: "privy", name: "Privy" },
+      { slug: "plaid", name: "Plaid" },
+    ],
+    categories: ["cards", "payments", "banking"],
+    tags: [
+      "Card Issuing",
+      "Virtual Cards",
+      "Payroll",
+      "Payments",
+    ],
+    ecosystems: ["Multi-chain", "Chain-agnostic"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: false,
+    url: "https://rain.xyz",
+  }),
+  defineApi({
+    slug: "circle",
+    name: "Circle",
+    description: "USDC issuance, treasury, and programmable wallet APIs.",
+    purpose: "Stablecoin infrastructure for neobanks and payment apps.",
+    commonUses: ["USDC treasury", "Programmable wallets", "Cross-border payouts"],
+    popularRecipes: ["Crypto neobank", "Payroll app"],
+    relatedApis: [
+      { slug: "rain", name: "Rain" },
+      { slug: "plaid", name: "Plaid" },
+    ],
+    categories: ["payments", "banking", "infrastructure"],
+    tags: ["Stablecoins", "Treasury", "Custody"],
+    ecosystems: ["Ethereum", "Base", "Multi-chain"],
+    isOpenSource: false,
+    isFree: true,
+    isFreemium: true,
+    hasGrantProgram: false,
+    url: "https://www.circle.com",
+  }),
+];
