@@ -55,7 +55,7 @@ function BentoApiCard({ api }: { api: FeaturedApiEntry }) {
       </div>
 
       <div className="mt-5 space-y-2">
-        <ApiEcosystemBadges ecosystems={api.ecosystems} max={2} />
+        <ApiEcosystemBadges ecosystems={api.ecosystems} max={2} linkable={false} />
         <div className="flex items-center gap-3 text-xs text-muted">
           <span>
             {api.categories[0]

@@ -60,7 +60,6 @@ export function ApiEcosystemBadges({
               chipClassName,
               "transition-colors hover:border-neutral-400 hover:bg-neutral-100 dark:hover:border-neutral-600 dark:hover:bg-neutral-800",
             )}
-            onClick={(e) => e.stopPropagation()}
           >
             {content}
           </Link>
