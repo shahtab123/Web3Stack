@@ -1,40 +1,10 @@
-import type { ApiEntry, ApiLink, RelatedApi } from "./api-directory-types";
+import type { ApiEntry, ApiLink, RelatedApi, ApiInput } from "./api-directory-types";
 import type { ApiCategory, ApiEcosystem } from "./api-directory-types";
 import type { ApiToolType } from "./api-directory-types";
 import type { ApiTag } from "./api-directory-constants";
+import { apiCatalogAdditionInputs } from "./api-directory-catalog-additions";
 
-type ApiInput = {
-  slug: string;
-  name: string;
-  description: string;
-  purpose: string;
-  overview?: string;
-  problemSolved?: string;
-  commonUses?: string[];
-  useCases?: string[];
-  buildIdeas?: string[];
-  whatCanYouBuild?: string[];
-  popularRecipes: string[];
-  relatedApis?: RelatedApi[];
-  similarTools?: RelatedApi[];
-  categories: ApiCategory[];
-  ecosystems: ApiEcosystem[];
-  tags?: ApiTag[];
-  isOpenSource: boolean;
-  isFree: boolean;
-  isFreemium: boolean;
-  hasGrantProgram: boolean;
-  hasApiAvailable?: boolean;
-  hasSdkAvailable?: boolean;
-  isHackathonFriendly?: boolean;
-  grantInfo?: string | null;
-  links?: ApiLink[];
-  url: string;
-  githubUrl?: string | null;
-  docsUrl?: string | null;
-  updatedAt?: string;
-  toolType?: ApiToolType;
-};
+export type { ApiInput } from "./api-directory-types";
 
 const TOOL_TYPE_BY_SLUG: Record<string, ApiToolType> = {
   privy: "platform",
@@ -85,7 +55,7 @@ function inferSdkAvailable(links: ApiLink[], categories: ApiCategory[]) {
   );
 }
 
-function defineApi(input: ApiInput): ApiEntry {
+export function defineApi(input: ApiInput): ApiEntry {
   const links: ApiLink[] = input.links ?? [{ label: "Website", url: input.url }];
   if (input.githubUrl && !links.some((l) => l.label === "GitHub")) {
     links.push({ label: "GitHub", url: input.githubUrl });
@@ -606,4 +576,5 @@ export const apiDirectory: ApiEntry[] = [
     hasGrantProgram: false,
     url: "https://www.circle.com",
   }),
+  ...apiCatalogAdditionInputs.map(defineApi),
 ];

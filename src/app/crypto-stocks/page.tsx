@@ -13,12 +13,14 @@ import {
 import {
   getStockMarketDataForEntries,
 } from "@/lib/stock-market/get-quotes";
+import { buildPageMetadata } from "@/lib/site-seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Crypto Stocks",
   description:
     "Publicly traded companies with significant exposure to crypto — live prices, performance, and builder context.",
-};
+  path: "/crypto-stocks",
+});
 
 export const revalidate = 300;
 

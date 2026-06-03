@@ -9,12 +9,14 @@ import {
   type RecipeSourceType,
 } from "@/lib/recipe-directory";
 import { RECIPE_ECOSYSTEM_FILTERS, RECIPE_SOURCE_TYPES } from "@/lib/recipe-directory-types";
+import { buildPageMetadata } from "@/lib/site-seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Recipes",
   description:
-    "Explore real applications, starter templates, demos and open-source projects built with popular APIs and ecosystems.",
-};
+    "Explore real applications, starter templates, demos and open-source projects built with popular Web3 APIs and ecosystems.",
+  path: "/recipes",
+});
 
 type PageProps = {
   searchParams: Promise<{

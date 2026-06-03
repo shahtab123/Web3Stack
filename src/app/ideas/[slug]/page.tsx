@@ -23,6 +23,7 @@ import {
   GrantBulletList,
   GrantSectionCard,
 } from "@/components/grants/grant-detail-sections";
+import { buildDetailMetadata } from "@/lib/site-seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -38,10 +39,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!idea) return { title: "Idea not found" };
 
-  return {
+  return buildDetailMetadata({
     title: idea.title,
     description: idea.description,
-  };
+    path: `/ideas/${idea.slug}`,
+  });
 }
 
 export default async function IdeaDetailPage({ params }: PageProps) {

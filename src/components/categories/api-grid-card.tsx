@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ApiEcosystemBadges } from "@/components/apis/api-ecosystem-badges";
 import { ProjectLogo } from "@/components/discover/project-logo";
 import { Badge } from "@/components/ui/badge";
 import type { ApiEntry } from "@/lib/api-directory";
@@ -31,6 +32,12 @@ export function ApiGridCard({ api }: { api: ApiEntry }) {
       <p className="mt-2 line-clamp-2 text-sm text-neutral-600 dark:text-neutral-400">
         {api.description}
       </p>
+      <ApiEcosystemBadges
+        ecosystems={api.ecosystems}
+        className="mt-2"
+        max={2}
+        linkable={false}
+      />
       <div className="mt-3 flex flex-wrap gap-1.5">
         {api.isFree && (
           <Badge variant="muted" className="text-[10px]">

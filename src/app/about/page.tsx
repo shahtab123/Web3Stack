@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/page-header";
+import { buildPageMetadata } from "@/lib/site-seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "About",
-  description: "About Web3Stack — criteria, scope, and how to contribute.",
-};
+  description: "About Web3Scout — criteria, scope, and how to contribute.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
     <div className="space-y-10">
       <PageHeader
         title="About"
-        subtitle="Web3Stack is a curated directory of APIs, tools, recipes, grants, and ecosystems for Web3 builders."
+        subtitle="Web3Scout is a curated directory of APIs, tools, recipes, grants, and ecosystems for Web3 builders."
       />
 
       <div className="grid gap-10 lg:grid-cols-2">

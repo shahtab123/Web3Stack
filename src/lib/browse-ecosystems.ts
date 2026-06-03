@@ -54,7 +54,7 @@ export const BROWSE_ECOSYSTEMS: BrowseEcosystem[] = [
     overview:
       "Build trading, gaming, and consumer apps with Solana wallet tooling and oracle infrastructure.",
     apiTags: ["Solana"],
-    featuredApiSlugs: ["privy", "pyth"],
+    featuredApiSlugs: ["helius", "jupiter-sdk", "metaplex", "privy"],
     relatedEcosystemSlugs: ["sui", "aptos", "hyperliquid"],
   },
   {
@@ -155,6 +155,61 @@ export const BROWSE_ECOSYSTEMS: BrowseEcosystem[] = [
     apiTags: ["Monad"],
     featuredApiSlugs: [],
     relatedEcosystemSlugs: ["ethereum", "berachain", "base"],
+  },
+  {
+    slug: "bitcoin",
+    name: "Bitcoin",
+    description: "Bitcoin, Lightning Network, and Bitcoin-anchored smart contract layers.",
+    subtitle: "Developer tools, APIs, and apps for Bitcoin and Lightning.",
+    overview:
+      "Build payments, micropayments, and L2 apps with Lightning, wallet APIs, and Stacks.",
+    apiTags: ["Bitcoin"],
+    featuredApiSlugs: ["lnd", "alby", "stacks-sdk"],
+    relatedEcosystemSlugs: ["ethereum", "base"],
+  },
+  {
+    slug: "cosmos",
+    name: "Cosmos",
+    description: "Interconnected appchains with IBC and the Cosmos SDK.",
+    subtitle: "Developer tools, APIs, and grants across Cosmos zones.",
+    overview:
+      "Ship IBC-native dapps with CosmJS, cross-chain routing, and zone-specific infrastructure.",
+    apiTags: ["Cosmos"],
+    featuredApiSlugs: ["cosmjs", "skip-protocol"],
+    relatedEcosystemSlugs: ["ethereum", "solana"],
+  },
+  {
+    slug: "ton",
+    name: "TON",
+    description: "The Open Network — Telegram-native chain for mini apps and payments.",
+    subtitle: "Developer tools, SDKs, and mini app opportunities on TON.",
+    overview:
+      "Build bots, mini apps, and payment flows with the TON SDK and Telegram distribution.",
+    apiTags: ["TON"],
+    featuredApiSlugs: ["ton-sdk"],
+    relatedEcosystemSlugs: ["solana", "base"],
+  },
+  {
+    slug: "multi-chain",
+    name: "Multi-chain",
+    description: "Protocols and tooling that work across multiple blockchains.",
+    subtitle: "Cross-chain APIs, bridges, and multichain developer infrastructure.",
+    overview:
+      "Explore wallets, indexers, and protocols designed for more than one chain from day one.",
+    apiTags: ["Multi-chain"],
+    featuredApiSlugs: ["alchemy", "privy", "layerzero", "wormhole"],
+    relatedEcosystemSlugs: ["ethereum", "base", "solana"],
+  },
+  {
+    slug: "chain-agnostic",
+    name: "Chain-agnostic",
+    description: "Off-chain and universal tools usable on any chain or without a chain.",
+    subtitle: "Auth, AI, compliance, and platform APIs not tied to one network.",
+    overview:
+      "Find identity, analytics, AI, and compliance tooling that integrates regardless of chain choice.",
+    apiTags: ["Chain-agnostic"],
+    featuredApiSlugs: ["privy", "stripe", "ollama", "immunefi"],
+    relatedEcosystemSlugs: ["ethereum", "multi-chain"],
   },
 ];
 

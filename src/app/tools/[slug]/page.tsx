@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getRelatedTools, getToolBySlug } from "@/lib/tools";
 import { formatCategory, formatPricing } from "@/lib/constants";
+import { buildDetailMetadata } from "@/lib/site-seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -22,10 +23,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Tool not found" };
   }
 
-  return {
+  return buildDetailMetadata({
     title: tool.name,
     description: tool.tagline,
-  };
+    path: `/tools/${tool.slug}`,
+  });
 }
 
 export default async function ToolDetailPage({ params }: PageProps) {

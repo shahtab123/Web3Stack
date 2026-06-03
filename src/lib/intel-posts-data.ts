@@ -4,6 +4,48 @@ import type { IntelPostCatalogEntry } from "./intel-posts-types";
 export const intelPostsCatalog: IntelPostCatalogEntry[] = [
   {
     platform: "x",
+    postUrl: "https://x.com/freeCodeCamp/status/2062263360586944853",
+    topics: ["apis"],
+    createdAt: "2026-06-03T14:00:00Z",
+  },
+  {
+    platform: "x",
+    postUrl: "https://x.com/Defi_Warhol/status/2062142507144855832",
+    topics: ["startup-ideas"],
+    createdAt: "2026-06-03T12:00:00Z",
+  },
+  {
+    platform: "x",
+    postUrl: "https://x.com/GoogleStartups/status/2061900671310315786",
+    topics: ["grants", "apis", "startup-ideas"],
+    createdAt: "2026-06-02T16:00:00Z",
+  },
+  {
+    platform: "x",
+    postUrl: "https://x.com/Faycytw/status/2061898367077327017",
+    topics: ["startup-ideas"],
+    createdAt: "2026-06-02T14:00:00Z",
+  },
+  {
+    platform: "x",
+    postUrl: "https://x.com/NachoColl75/status/2061803244435702143",
+    topics: ["infrastructure", "apis"],
+    createdAt: "2026-06-02T11:00:00Z",
+  },
+  {
+    platform: "x",
+    postUrl: "https://x.com/GmblrMartin/status/2057723863127978406",
+    topics: ["startup-ideas"],
+    createdAt: "2026-05-22T10:00:00Z",
+  },
+  {
+    platform: "x",
+    postUrl: "https://x.com/growthinweb3/status/2056419718597124462",
+    topics: ["apis", "startup-ideas"],
+    createdAt: "2026-05-18T09:00:00Z",
+  },
+  {
+    platform: "x",
     postUrl: "https://x.com/MelchBD/status/2061510995550343482",
     topics: ["startup-ideas", "apis"],
     createdAt: "2026-06-01T12:00:00Z",

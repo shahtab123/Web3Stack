@@ -50,7 +50,7 @@ function ContributionsDialog({
         <DialogHeader>
           <DialogTitle>{contributor.name}</DialogTitle>
           <DialogDescription>
-            {count} contribution{count === 1 ? "" : "s"} to Web3Stack
+            {count} contribution{count === 1 ? "" : "s"} to Web3Scout
           </DialogDescription>
         </DialogHeader>
         <DialogBody className="max-h-[min(50vh,420px)]">

@@ -12,12 +12,14 @@ import {
   type GrantStatus,
 } from "@/lib/grants-directory";
 import { isBuilderType, isFundingStage, isFundingType, isGrantSort } from "@/lib/grants-directory-types";
+import { buildPageMetadata } from "@/lib/site-seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Funding Opportunities",
   description:
-    "Grants, hackathons, accelerators, bounties and ecosystem programs for builders at every stage.",
-};
+    "Grants, hackathons, accelerators, bounties and ecosystem programs for Web3 builders at every stage.",
+  path: "/grants",
+});
 
 type PageProps = {
   searchParams: Promise<{

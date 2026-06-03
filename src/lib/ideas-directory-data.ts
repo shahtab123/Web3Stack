@@ -1,4 +1,5 @@
 import type { IdeaEntry } from "./ideas-directory-types";
+import { ideaCatalogAdditionEntries } from "./ideas-directory-additions";
 
 function defineIdea(entry: IdeaEntry): IdeaEntry {
   return entry;
@@ -706,7 +707,7 @@ export const ideasDirectory: IdeaEntry[] = [
     title: "API Discovery Engine",
     description: "Exactly your current project.",
     overview:
-      "A searchable directory of crypto APIs, SDKs, recipes, and builder resources — Web3Stack itself.",
+      "A searchable directory of crypto APIs, SDKs, recipes, and builder resources — Web3Scout itself.",
     problem:
       "Developers waste days discovering which APIs, grants, and starter projects exist across fragmented ecosystem sites.",
     suggestedFeatures: [
@@ -723,7 +724,7 @@ export const ideasDirectory: IdeaEntry[] = [
     ecosystemSlugs: ["ethereum", "base"],
     relatedRecipeSlugs: ["defi-dashboard"],
     relatedIdeaSlugs: ["ecosystem-explorer", "web3-stack-generator"],
-    examples: [{ name: "Web3Stack", url: "https://github.com" }],
+    examples: [{ name: "Web3Scout", url: "https://github.com" }],
   }),
   defineIdea({
     slug: "grant-discovery-platform",
@@ -1126,6 +1127,7 @@ export const ideasDirectory: IdeaEntry[] = [
     ecosystemSlugs: ["ethereum", "base"],
     relatedRecipeSlugs: ["agentkit", "onchain-agent-demo"],
     relatedIdeaSlugs: ["api-discovery-engine", "ecosystem-explorer"],
-    examples: [{ name: "Web3Stack", url: "https://github.com" }],
+    examples: [{ name: "Web3Scout", url: "https://github.com" }],
   }),
+  ...ideaCatalogAdditionEntries,
 ];

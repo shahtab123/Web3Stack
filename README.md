@@ -1,4 +1,4 @@
-# Web3Stack
+# Web3Scout
 
 Everything you need to build in Web3 — APIs, tools, recipes, grants and ecosystems all in one place.
 

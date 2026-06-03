@@ -33,7 +33,7 @@ type GrantInput = {
   builderTypes?: BuilderType[];
   location?: string;
   remoteFriendly?: boolean;
-  applyUrl: string;
+  applyUrl?: string;
   websiteUrl?: string;
   learnMoreUrl?: string;
   addedAt?: string;
@@ -60,6 +60,11 @@ const ECOSYSTEM_NAMES: Record<string, string> = {
   polygon: "Polygon",
   berachain: "Berachain",
   monad: "Monad",
+  starknet: "Starknet",
+  scroll: "Scroll",
+  celo: "Celo",
+  polkadot: "Polkadot",
+  cosmos: "Cosmos",
 };
 
 const ECOSYSTEM_API_TAGS: Record<string, ApiEcosystem> = {
@@ -75,6 +80,12 @@ const ECOSYSTEM_API_TAGS: Record<string, ApiEcosystem> = {
   polygon: "Polygon",
   berachain: "Berachain",
   monad: "Monad",
+  starknet: "Ethereum",
+  scroll: "Ethereum",
+  celo: "Ethereum",
+  polkadot: "Ethereum",
+  cosmos: "Cosmos",
+  "multi-chain": "Multi-chain",
 };
 
 const STAGE_ORDER: FundingStage[] = [
@@ -325,10 +336,15 @@ function defaultImportantDates(input: GrantInput): GrantImportantDate[] {
 
 function defaultOfficialLinks(input: GrantInput): GrantOfficialLink[] {
   const websiteUrl = input.websiteUrl ?? input.applyUrl;
+  if (!websiteUrl) return [];
+
   const links: GrantOfficialLink[] = [
     { label: "Official website", url: websiteUrl },
-    { label: "Apply", url: input.applyUrl },
   ];
+
+  if (input.applyUrl) {
+    links.push({ label: "Apply", url: input.applyUrl });
+  }
 
   getResourcesForEcosystem(input.ecosystemSlug)
     .slice(0, 1)
@@ -376,7 +392,8 @@ export function defineGrant(input: GrantInput): GrantEntry {
     builderTypes,
     location: input.location ?? "Global",
     remoteFriendly: input.remoteFriendly ?? true,
-    websiteUrl: input.websiteUrl ?? input.applyUrl,
+    websiteUrl: input.websiteUrl ?? input.applyUrl ?? "",
+    applyUrl: input.applyUrl,
     learnMoreUrl: input.learnMoreUrl ?? `/grants/${input.slug}`,
     addedAt: input.addedAt ?? "2026-01-01",
     fundingAmountMax,

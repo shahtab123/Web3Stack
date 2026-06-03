@@ -4,12 +4,14 @@ import { IdeaCard } from "@/components/ideas/idea-card";
 import { IdeaFilters } from "@/components/ideas/idea-filters";
 import { PageHeader } from "@/components/layout/page-header";
 import { getIdeas } from "@/lib/ideas-directory";
+import { buildPageMetadata } from "@/lib/site-seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Ideas",
   description:
-    "Discover products, tools and startups that can be built using open-source, free and freemium APIs.",
-};
+    "Discover products, tools and startups that can be built using open-source, free and freemium Web3 APIs.",
+  path: "/ideas",
+});
 
 type PageProps = {
   searchParams: Promise<{

@@ -6,12 +6,14 @@ import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import { contributors, getContributorStats } from "@/lib/contributors-data";
 import { SITE } from "@/lib/navigation";
+import { buildPageMetadata } from "@/lib/site-seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Contributors",
   description:
-    "People who help improve Web3Stack by submitting APIs, recipes, grants, and builder resources.",
-};
+    "People who help improve Web3Scout by submitting APIs, recipes, grants, and builder resources.",
+  path: "/contributors",
+});
 
 export default function ContributorsPage() {
   const stats = getContributorStats();

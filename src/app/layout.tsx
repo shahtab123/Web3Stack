@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppShell } from "@/components/layout/app-shell";
+import { WebsiteJsonLd } from "@/components/seo/website-json-ld";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeScript } from "@/components/theme/theme-script";
+import { buildRootMetadata } from "@/lib/site-seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,14 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Web3Stack",
-    template: "%s · Web3Stack",
-  },
-  description:
-    "APIs, tools, recipes, grants and ecosystems all in one place for building in Web3.",
-};
+export const metadata: Metadata = buildRootMetadata();
 
 export default function RootLayout({
   children,
@@ -34,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen font-sans`}
       >
+        <WebsiteJsonLd />
         <ThemeScript />
         <ThemeProvider>
           <AppShell>{children}</AppShell>

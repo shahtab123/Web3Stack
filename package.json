@@ -1,5 +1,5 @@
 {
-  "name": "web3stack",
+  "name": "web3scout",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx src/db/seed.ts",
+    "social-images": "powershell -ExecutionPolicy Bypass -File scripts/generate-social-images.ps1",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {

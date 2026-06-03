@@ -1,4 +1,5 @@
 import type { RecipeEntry } from "./recipe-directory-types";
+import { recipeCatalogAdditionInputs } from "./recipe-directory-additions";
 
 type RecipeInput = Omit<RecipeEntry, "links" | "gettingStartedLinks" | "relatedRecipeSlugs" | "techStack" | "screenshots"> & {
   techStack?: string[];
@@ -1017,4 +1018,5 @@ export const recipeDirectory: RecipeEntry[] = [
     ],
     relatedRecipeSlugs: ["hey-social-app", "uniswap-pool-explorer", "pangolin-dex"],
   }),
+  ...recipeCatalogAdditionInputs.map(defineRecipe),
 ];

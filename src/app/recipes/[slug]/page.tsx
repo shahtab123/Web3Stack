@@ -21,6 +21,7 @@ import {
   getRelatedRecipes,
   recipeDirectory,
 } from "@/lib/recipe-directory";
+import { buildDetailMetadata } from "@/lib/site-seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -36,10 +37,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!recipe) return { title: "Recipe not found" };
 
-  return {
+  return buildDetailMetadata({
     title: recipe.name,
     description: recipe.description,
-  };
+    path: `/recipes/${recipe.slug}`,
+  });
 }
 
 export default async function RecipeDetailPage({ params }: PageProps) {

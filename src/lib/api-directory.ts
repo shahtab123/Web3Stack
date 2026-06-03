@@ -202,7 +202,10 @@ export {
   API_CATEGORIES,
   API_ECOSYSTEMS,
   API_TOOL_TYPES,
+  ecosystemToLogoSlug,
+  formatApiCategoryWithTags,
   getApiCategoryLabel,
+  getDisplayEcosystems,
   getApiToolTypeLabel,
 } from "./api-directory-types";
 export {

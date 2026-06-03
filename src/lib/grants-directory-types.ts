@@ -86,7 +86,7 @@ export type GrantEntry = {
   builderTypes: BuilderType[];
   location: string;
   remoteFriendly: boolean;
-  applyUrl: string;
+  applyUrl?: string;
   websiteUrl: string;
   learnMoreUrl: string;
   addedAt: string;

@@ -51,13 +51,20 @@ export function GrantCard({ grant }: { grant: GrantEntry }) {
       </dl>
 
       <div className="mt-5 flex gap-2">
-        <Button asChild size="sm" className="flex-1">
-          <a href={grant.applyUrl} target="_blank" rel="noopener noreferrer">
-            Apply
-            <ArrowUpRight className="size-3.5" />
-          </a>
-        </Button>
-        <Button asChild variant="outline" size="sm" className="flex-1">
+        {grant.applyUrl ? (
+          <Button asChild size="sm" className="flex-1">
+            <a href={grant.applyUrl} target="_blank" rel="noopener noreferrer">
+              Apply
+              <ArrowUpRight className="size-3.5" />
+            </a>
+          </Button>
+        ) : null}
+        <Button
+          asChild
+          variant={grant.applyUrl ? "outline" : "default"}
+          size="sm"
+          className="flex-1"
+        >
           <Link href={grant.learnMoreUrl}>Learn More</Link>
         </Button>
       </div>

@@ -21,6 +21,9 @@ const ecosystemSlugMap: Record<string, string> = {
   Monad: "monad",
   "Multi-chain": "multi-chain",
   "Chain-agnostic": "chain-agnostic",
+  Bitcoin: "bitcoin",
+  Cosmos: "cosmos",
+  TON: "ton",
 };
 
 export const seedEcosystems = [
@@ -38,6 +41,41 @@ export const seedEcosystems = [
     slug: "chain-agnostic",
     name: "Chain-agnostic",
     description: "Tools that work across any chain or off-chain",
+  },
+  {
+    slug: "bitcoin",
+    name: "Bitcoin",
+    description: "Bitcoin, Lightning, and Bitcoin-anchored L2 tooling",
+  },
+  {
+    slug: "cosmos",
+    name: "Cosmos",
+    description: "Cosmos SDK zones, IBC, and cross-chain Cosmos apps",
+  },
+  {
+    slug: "ton",
+    name: "TON",
+    description: "The Open Network and Telegram-native mini apps",
+  },
+  {
+    slug: "starknet",
+    name: "Starknet",
+    description: "Ethereum L2 with Cairo smart contracts and STARK proofs",
+  },
+  {
+    slug: "scroll",
+    name: "Scroll",
+    description: "zkEVM rollup scaling Ethereum with EVM compatibility",
+  },
+  {
+    slug: "celo",
+    name: "Celo",
+    description: "Mobile-first EVM chain focused on real-world payments",
+  },
+  {
+    slug: "polkadot",
+    name: "Polkadot",
+    description: "Substrate-based multichain network and parachain ecosystem",
   },
 ].filter(
   (eco, index, arr) => arr.findIndex((e) => e.slug === eco.slug) === index,
@@ -63,6 +101,13 @@ const apiEcosystemSlug: Record<string, string> = {
   Monad: "monad",
   "Multi-chain": "multi-chain",
   "Chain-agnostic": "chain-agnostic",
+  Bitcoin: "bitcoin",
+  Cosmos: "cosmos",
+  TON: "ton",
+  Starknet: "starknet",
+  Scroll: "scroll",
+  Celo: "celo",
+  Polkadot: "polkadot",
 };
 
 export const seedApis = apiDirectory.map((api) => ({
@@ -90,7 +135,7 @@ export const seedGrants = grantsDirectory.map((grant) => ({
   slug: grant.slug,
   title: grant.name,
   description: grant.description,
-  link: grant.applyUrl,
+  link: grant.applyUrl ?? grant.websiteUrl,
   ecosystemSlug: grant.ecosystemSlug,
 }));
 

@@ -21,6 +21,7 @@ import {
   apiDirectory,
 } from "@/lib/api-directory";
 import { getApiResourceLinks } from "@/lib/api-detail-helpers";
+import { buildDetailMetadata } from "@/lib/site-seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -36,10 +37,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!api) return { title: "API not found" };
 
-  return {
+  return buildDetailMetadata({
     title: api.name,
     description: api.description,
-  };
+    path: `/apis/${api.slug}`,
+  });
 }
 
 export default async function ApiDetailPage({ params }: PageProps) {

@@ -1,6 +1,8 @@
+import { SITE as SEO_SITE } from "./site-seo";
+
 export const SITE = {
-  name: "Web3Stack",
-  githubUrl: "https://github.com/shahtab123/Web3Stack",
+  name: SEO_SITE.name,
+  githubUrl: SEO_SITE.githubUrl,
   submitUrl: "/submit",
   contributorsUrl: "/contributors",
 } as const;

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ApiEcosystemBadges } from "@/components/apis/api-ecosystem-badges";
 import { ProjectLogo } from "@/components/discover/project-logo";
 import { SectionHeader } from "@/components/discover/section-header";
 import { FadeIn } from "@/components/discover/motion";
@@ -53,16 +54,19 @@ function BentoApiCard({ api }: { api: FeaturedApiEntry }) {
         </div>
       </div>
 
-      <div className="mt-5 flex items-center gap-3 text-xs text-muted">
-        <span>
-          {api.categories[0]
-            ? getApiCategoryLabel(api.categories[0])
-            : "API"}
-        </span>
-        <span aria-hidden>·</span>
-        <span>
-          {api.recipeCount} {api.recipeCount === 1 ? "recipe" : "recipes"}
-        </span>
+      <div className="mt-5 space-y-2">
+        <ApiEcosystemBadges ecosystems={api.ecosystems} max={2} />
+        <div className="flex items-center gap-3 text-xs text-muted">
+          <span>
+            {api.categories[0]
+              ? getApiCategoryLabel(api.categories[0])
+              : "API"}
+          </span>
+          <span aria-hidden>·</span>
+          <span>
+            {api.recipeCount} {api.recipeCount === 1 ? "recipe" : "recipes"}
+          </span>
+        </div>
       </div>
     </Link>
   );

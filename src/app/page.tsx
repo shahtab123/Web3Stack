@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/site-seo";
 import { ExplorerSection } from "@/components/discover/explorer-section";
 import { FeaturedApis } from "@/components/discover/featured-apis";
 import { CategorySection } from "@/components/discover/category-section";
@@ -15,11 +16,12 @@ import { getRecipes } from "@/lib/recipe-directory";
 import { getGrants } from "@/lib/grants-directory";
 import { getHomepageIntelPreview } from "@/lib/intel-posts";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Discover",
   description:
     "Everything you need to build in Web3. Free and open — APIs, tools, recipes, grants and ecosystems.",
-};
+  path: "/",
+});
 
 export default async function HomePage() {
   const [intelPreview, featuredApis, featuredRecipes, homepageEcosystems, activeGrants] =

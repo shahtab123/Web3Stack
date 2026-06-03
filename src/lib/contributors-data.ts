@@ -58,7 +58,7 @@ export const contributors: ContributorEntry[] = [
       { label: "X", url: "https://x.com/SMohtasin" },
     ],
     items: [
-      { id: "web3stack", title: "Web3Stack directory launch", page: "Site" },
+      { id: "web3scout", title: "Web3Scout directory launch", page: "Site" },
       { id: "apis", title: "APIs directory", page: "APIs" },
       { id: "recipes", title: "Recipes directory", page: "Recipes" },
       { id: "ideas", title: "Ideas directory", page: "Ideas" },

@@ -30,7 +30,7 @@ export const cryptoStocksDirectory = [
     relatedApiSlugs: ["alchemy", "circle", "privy"],
     relatedEcosystemSlugs: ["base", "ethereum"],
     relatedRecipeSlugs: ["wallet-login-system", "base-social-mini-app"],
-    relatedTickers: ["hood", "etoro", "bakkt"],
+    relatedTickers: ["gemini", "bullish", "hood", "etoro", "bakkt"],
     website: "https://www.coinbase.com",
   }),
   defineCryptoStock({
@@ -87,6 +87,47 @@ export const cryptoStocksDirectory = [
     relatedTickers: ["coin", "hood", "etoro"],
     website: "https://www.bakkt.com",
   }),
+  defineCryptoStock({
+    ticker: "gemini",
+    name: "Gemini Space Station",
+    displayTicker: "GEMI",
+    category: "exchanges",
+    description:
+      "Winklevoss-founded crypto exchange — newly public on Nasdaq (Sep 2025).",
+    exposureSummary:
+      "Regulated US exchange and custody with fresh public-market listing.",
+    overview:
+      "Gemini is the Winklevoss twins' US crypto exchange. GEMI began trading on Nasdaq in September 2025, giving builders a newly listed exchange peer alongside COIN and HOOD.",
+    cryptoActivities: [
+      "Retail and institutional crypto trading",
+      "Custody and staking",
+      "Public-market exchange operator",
+    ],
+    relatedTickers: ["coin", "hood", "bullish"],
+    website: "https://www.gemini.com",
+    listingNote: "Listed on Nasdaq, September 2025 (GEMI).",
+  }),
+  defineCryptoStock({
+    ticker: "bullish",
+    name: "Bullish",
+    displayTicker: "BLSH",
+    category: "exchanges",
+    description:
+      "Institutional crypto exchange and CoinDesk parent — NYSE IPO Aug 2025.",
+    exposureSummary:
+      "Institutional spot and derivatives exchange plus CoinDesk media and data.",
+    overview:
+      "Bullish (NYSE: BLSH) went public in August 2025 with a strong first-day pop. It runs an institutional-focused exchange and owns CoinDesk indices, data, and media — a full-stack market infrastructure play.",
+    cryptoActivities: [
+      "Institutional spot and derivatives trading",
+      "CoinDesk media, indices, and market data",
+      "Regulated crypto market infrastructure",
+    ],
+    cryptoProducts: ["Bullish Exchange", "CoinDesk", "CoinDesk Indices"],
+    relatedTickers: ["coin", "gemini", "glxy"],
+    website: "https://www.bullish.com",
+    listingNote: "NYSE IPO August 2025 (BLSH).",
+  }),
 
   // Bitcoin Treasury
   defineCryptoStock({
@@ -104,7 +145,7 @@ export const cryptoStocksDirectory = [
       "Regular BTC purchase disclosures",
       "Bitcoin-backed financing",
     ],
-    relatedTickers: ["metaplanet", "smlr", "blockchain-group"],
+    relatedTickers: ["xxi", "asst", "metaplanet", "smlr", "gme", "tsla"],
     website: "https://www.strategy.com",
   }),
   defineCryptoStock({
@@ -123,7 +164,7 @@ export const cryptoStocksDirectory = [
       "Public treasury disclosures",
       "BTC-focused capital strategy",
     ],
-    relatedTickers: ["strategy", "smlr", "blockchain-group"],
+    relatedTickers: ["strategy", "xxi", "asst", "smlr", "blockchain-group"],
     website: "https://metaplanet.jp",
   }),
   defineCryptoStock({
@@ -144,7 +185,7 @@ export const cryptoStocksDirectory = [
       "Treasury strategy updates",
       "Public BTC holding disclosures",
     ],
-    relatedTickers: ["strategy", "metaplanet", "blockchain-group"],
+    relatedTickers: ["asst", "strategy", "metaplanet", "blockchain-group"],
     website: "https://www.semlerscientific.com",
   }),
   defineCryptoStock({
@@ -165,6 +206,84 @@ export const cryptoStocksDirectory = [
     ],
     relatedTickers: ["strategy", "metaplanet", "smlr"],
     website: "https://www.theblockchaingroup.com",
+  }),
+  defineCryptoStock({
+    ticker: "xxi",
+    name: "Twenty One Capital",
+    displayTicker: "XXI",
+    category: "bitcoin-treasury",
+    description:
+      "NYSE Bitcoin treasury company — 43,514 BTC, backed by Tether and Bitfinex.",
+    exposureSummary:
+      "Large corporate BTC treasury with Tether and Bitfinex strategic backing.",
+    overview:
+      "Twenty One Capital (NYSE: XXI) listed in December 2025 as a major Bitcoin treasury vehicle with 43,514 BTC on its balance sheet, backed by Tether and Bitfinex — one of the largest newly public BTC treasury names.",
+    cryptoActivities: [
+      "Corporate Bitcoin treasury accumulation",
+      "Public BTC holding disclosures",
+      "Strategic backing from Tether and Bitfinex",
+    ],
+    relatedTickers: ["strategy", "asst", "gme", "tsla"],
+    website: "https://www.twentyonecapital.com",
+    listingNote: "Listed on NYSE, December 2025 (XXI).",
+  }),
+  defineCryptoStock({
+    ticker: "asst",
+    name: "Strive Asset Management",
+    displayTicker: "ASST",
+    category: "bitcoin-treasury",
+    description:
+      "Bitcoin treasury firm co-founded by Vivek Ramaswamy — 13,678 BTC.",
+    exposureSummary:
+      "Active corporate BTC treasury after Semler Scientific merger (Jan 2026).",
+    overview:
+      "Strive (NASDAQ: ASST) is a Bitcoin treasury company co-founded by Vivek Ramaswamy, holding 13,678 BTC. It absorbed Semler Scientific (SMLR) in January 2026 and continues the public-market BTC accumulation playbook.",
+    cryptoActivities: [
+      "Corporate Bitcoin purchases",
+      "Treasury strategy and disclosures",
+      "M&A of Bitcoin treasury peers",
+    ],
+    relatedTickers: ["strategy", "xxi", "smlr", "gme"],
+    website: "https://www.strive.com",
+    listingNote: "Semler Scientific (SMLR) merged into Strive, January 2026.",
+  }),
+  defineCryptoStock({
+    ticker: "gme",
+    name: "GameStop",
+    displayTicker: "GME",
+    category: "bitcoin-treasury",
+    description:
+      "Retail company with $500M+ Bitcoin purchases in 2025.",
+    exposureSummary:
+      "Meme-stock retailer evolving into a crypto treasury narrative.",
+    overview:
+      "GameStop (NYSE: GME) bought more than $500M of Bitcoin in 2025, reframing the retailer as a crypto treasury story alongside Strategy and other corporate BTC holders.",
+    cryptoActivities: [
+      "Corporate Bitcoin purchases",
+      "Treasury allocation disclosures",
+      "Retail + digital asset crossover narrative",
+    ],
+    relatedTickers: ["strategy", "xxi", "asst", "tsla"],
+    website: "https://www.gamestop.com",
+  }),
+  defineCryptoStock({
+    ticker: "tsla",
+    name: "Tesla",
+    displayTicker: "TSLA",
+    category: "bitcoin-treasury",
+    description:
+      "Major corporate Bitcoin holder — 11,509 BTC on balance sheet.",
+    exposureSummary:
+      "Large-cap industrial with material BTC holdings reported at fair value.",
+    overview:
+      "Tesla (NASDAQ: TSLA) holds 11,509 BTC on its balance sheet and reports crypto at fair market value since 2025 — a mainstream corporate treasury reference for builders tracking public BTC exposure.",
+    cryptoActivities: [
+      "Corporate Bitcoin holdings",
+      "Fair-value BTC accounting disclosures",
+      "Payments and product ecosystem (adjacent)",
+    ],
+    relatedTickers: ["strategy", "xxi", "asst", "gme"],
+    website: "https://www.tesla.com",
   }),
 
   // Mining
@@ -254,7 +373,7 @@ export const cryptoStocksDirectory = [
       "Digital infrastructure",
       "Energy and hosting assets",
     ],
-    relatedTickers: ["mara", "corz", "apld"],
+    relatedTickers: ["abtc", "mara", "corz", "apld"],
     website: "https://www.hut8.com",
   }),
   defineCryptoStock({
@@ -310,6 +429,64 @@ export const cryptoStocksDirectory = [
     ],
     relatedTickers: ["mara", "riot", "btdr"],
     website: "https://www.ciphermining.com",
+  }),
+  defineCryptoStock({
+    ticker: "wulf",
+    name: "TeraWulf",
+    displayTicker: "WULF",
+    category: "mining",
+    description:
+      "AI-oriented Bitcoin miner with strong performance in prior downturns.",
+    exposureSummary:
+      "Zero-carbon mining plus AI/HPC hosting expansion.",
+    overview:
+      "TeraWulf (NASDAQ: WULF) operates Bitcoin mining with a focus on sustainable power and AI-oriented compute — often cited as a resilient miner through prior market downturns.",
+    cryptoActivities: [
+      "Bitcoin mining operations",
+      "AI and HPC hosting partnerships",
+      "Renewable and low-carbon power strategy",
+    ],
+    relatedTickers: ["iren", "hut", "mara", "riot"],
+    website: "https://www.terawulf.com",
+  }),
+  defineCryptoStock({
+    ticker: "iren",
+    name: "Iris Energy",
+    displayTicker: "IREN",
+    category: "mining",
+    description:
+      "AI and Bitcoin mining operator — standout return in the 2025–2026 cycle.",
+    exposureSummary:
+      "Dual AI + Bitcoin mining growth with strong recent market performance.",
+    overview:
+      "Iris Energy (NASDAQ: IREN) combines Bitcoin mining with AI data center expansion and was among the top-performing mining names in the 2025–2026 cycle (+368% cited return).",
+    cryptoActivities: [
+      "Bitcoin mining at scale",
+      "AI data center buildout",
+      "Renewable-powered infrastructure",
+    ],
+    relatedTickers: ["wulf", "corz", "apld", "mara"],
+    website: "https://www.irisenergy.co",
+  }),
+  defineCryptoStock({
+    ticker: "abtc",
+    name: "American Bitcoin",
+    displayTicker: "ABTC",
+    category: "mining",
+    description:
+      "Hut 8 majority-owned mining and BTC accumulation platform — Nasdaq Sep 2025.",
+    exposureSummary:
+      "Mining plus disciplined BTC accumulation via public Nasdaq vehicle.",
+    overview:
+      "American Bitcoin (NASDAQ: ABTC) began trading in September 2025 after merging with Gryphon. It is a majority-owned Hut 8 subsidiary combining scaled mining with Bitcoin accumulation strategies.",
+    cryptoActivities: [
+      "Self-mined Bitcoin production",
+      "Corporate BTC accumulation",
+      "Public-market mining + treasury hybrid model",
+    ],
+    relatedTickers: ["hut", "mara", "wulf", "iren"],
+    website: "https://www.abtc.com",
+    listingNote: "Nasdaq listing September 2025; majority-owned by Hut 8.",
   }),
 
   // Stablecoins & Payments
@@ -403,7 +580,7 @@ export const cryptoStocksDirectory = [
       "Asset management",
       "Venture and research",
     ],
-    relatedTickers: ["deft", "coinshares"],
+    relatedTickers: ["bitgo", "bullish", "deft", "coinshares"],
     website: "https://www.galaxy.com",
   }),
   defineCryptoStock({
@@ -443,6 +620,48 @@ export const cryptoStocksDirectory = [
     ],
     relatedTickers: ["glxy", "deft", "blk"],
     website: "https://coinshares.com",
+  }),
+  defineCryptoStock({
+    ticker: "bitgo",
+    name: "BitGo",
+    displayTicker: "Private",
+    category: "crypto-financial-services",
+    description:
+      "Institutional custody and regulated staking — S-1 filed late 2025, IPO expected 2026.",
+    exposureSummary:
+      "Qualified custody, wallets, and staking for institutions pre-IPO.",
+    overview:
+      "BitGo is a leading institutional digital asset custodian with regulated staking. It filed an S-1 in late 2025 and is targeting a 2026 IPO — a key infrastructure name before it trades publicly.",
+    cryptoActivities: [
+      "Institutional digital asset custody",
+      "Regulated staking services",
+      "Wallet and treasury infrastructure",
+    ],
+    relatedTickers: ["glxy", "coin", "cantor"],
+    website: "https://www.bitgo.com",
+    isPrivate: true,
+    listingNote: "Filed S-1 late 2025; IPO targeting 2026.",
+  }),
+  defineCryptoStock({
+    ticker: "cantor",
+    name: "Cantor Fitzgerald",
+    displayTicker: "Private",
+    category: "crypto-financial-services",
+    description:
+      "TradFi investment bank embedded in crypto via Twenty One Capital SPAC.",
+    exposureSummary:
+      "Capital markets and SPAC sponsorship for Bitcoin treasury listings.",
+    overview:
+      "Cantor Fitzgerald is a traditional finance firm deeply involved in crypto capital markets — notably as a sponsor and advisor on the Twenty One Capital (XXI) SPAC that brought a major BTC treasury to the NYSE.",
+    cryptoActivities: [
+      "SPAC and capital markets advisory",
+      "Crypto treasury deal sponsorship",
+      "Institutional distribution partnerships",
+    ],
+    relatedTickers: ["xxi", "glxy", "bitgo"],
+    website: "https://www.cantor.com",
+    isPrivate: true,
+    listingNote: "Privately held; key sponsor of Twenty One Capital (XXI) listing.",
   }),
 
   // Infrastructure & Blockchain

@@ -86,7 +86,7 @@ export function ExplorerSection() {
         className="mx-auto space-y-5"
       >
         <p className="text-[11px] font-medium uppercase tracking-[0.24em] text-muted">
-          Web3Stack
+          Web3Scout
         </p>
 
         <div className="mx-auto space-y-3">
@@ -106,7 +106,7 @@ export function ExplorerSection() {
       <div className="mx-auto space-y-5">
         <form onSubmit={handleSubmit} className="group relative text-left">
           <label htmlFor="explorer-search" className="sr-only">
-            Search Web3Stack
+            Search Web3Scout
           </label>
 
           <div

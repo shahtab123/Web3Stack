@@ -39,6 +39,7 @@ import {
   GrantSectionCard,
 } from "@/components/grants/grant-detail-sections";
 import { cn } from "@/lib/utils";
+import { buildDetailMetadata } from "@/lib/site-seo";
 
 export const revalidate = 300;
 
@@ -56,10 +57,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!stock) return { title: "Company not found" };
 
-  return {
-    title: stock.name,
+  return buildDetailMetadata({
+    title: `${stock.name} (${stock.displayTicker})`,
     description: stock.exposureSummary,
-  };
+    path: `/crypto-stocks/${stock.ticker}`,
+  });
 }
 
 export default async function CryptoStockDetailPage({ params }: PageProps) {

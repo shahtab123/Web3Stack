@@ -52,6 +52,11 @@ export const API_DIRECTORY_ECOSYSTEM_FILTERS = [
   "Aptos",
   "Multi-chain",
   "Chain-agnostic",
+  "Bitcoin",
+  "Cosmos",
+  "TON",
+  "Berachain",
+  "Monad",
 ] as const;
 
 export const API_CAPABILITY_TAGS = [
@@ -85,6 +90,15 @@ export const API_CAPABILITY_TAGS = [
   "On/Off Ramp",
   "Grants",
   "Hackathons",
+  "Messaging",
+  "Notifications",
+  "Social",
+  "DeFi",
+  "Gasless",
+  "Privacy",
+  "NFT",
+  "Lending",
+  "Cross-chain",
 ] as const;
 
 export type ApiTag = (typeof API_CAPABILITY_TAGS)[number];

@@ -2,12 +2,14 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { GlobalSearch } from "@/components/search/global-search";
 import { globalSearch } from "@/lib/global-search";
+import { buildPageMetadata } from "@/lib/site-seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Search",
   description:
     "Search across APIs, recipes, grants, ecosystems and builder intel.",
-};
+  path: "/search",
+});
 
 type PageProps = {
   searchParams: Promise<{

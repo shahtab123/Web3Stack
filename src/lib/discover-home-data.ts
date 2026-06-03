@@ -18,7 +18,7 @@ export const POPULAR_SEARCHES = [
 export const FEATURED_API_SLUGS = [
   "privy",
   "hyperliquid",
-  "rain",
+  "solana",
   "circle",
   "alchemy",
   "immunefi",
@@ -31,7 +31,7 @@ export const FEATURED_API_BENTO_SIZE: Record<
 > = {
   hyperliquid: "large",
   privy: "large",
-  rain: "medium",
+  solana: "medium",
   circle: "medium",
   alchemy: "medium",
   immunefi: "medium",
@@ -40,7 +40,7 @@ export const FEATURED_API_BENTO_SIZE: Record<
 export const FEATURED_API_BENTO_ORDER = [
   "hyperliquid",
   "privy",
-  "rain",
+  "solana",
   "circle",
   "alchemy",
   "immunefi",
@@ -101,6 +101,21 @@ export const ECOSYSTEM_ACCENTS: Record<
     gradient: "from-sky-500/20 via-blue-600/5 to-transparent",
     glow: "group-hover:shadow-sky-500/20",
     mark: "bg-sky-500",
+  },
+  bitcoin: {
+    gradient: "from-orange-500/20 via-amber-600/5 to-transparent",
+    glow: "group-hover:shadow-orange-500/20",
+    mark: "bg-orange-500",
+  },
+  cosmos: {
+    gradient: "from-indigo-500/20 via-violet-600/5 to-transparent",
+    glow: "group-hover:shadow-indigo-500/20",
+    mark: "bg-indigo-500",
+  },
+  ton: {
+    gradient: "from-sky-500/20 via-cyan-600/5 to-transparent",
+    glow: "group-hover:shadow-sky-500/20",
+    mark: "bg-sky-400",
   },
 };
 

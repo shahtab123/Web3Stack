@@ -16,6 +16,7 @@ import {
   type ApiTag,
   type ApiToolType,
 } from "@/lib/api-directory";
+import { buildPageMetadata } from "@/lib/site-seo";
 
 function parseTagParam(value: string | undefined): ApiTag | undefined {
   if (!value) return undefined;
@@ -24,11 +25,12 @@ function parseTagParam(value: string | undefined): ApiTag | undefined {
     : undefined;
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "APIs & Developer Tools",
   description:
-    "Discover free and freemium APIs, SDKs, infrastructure and developer platforms.",
-};
+    "Discover free and freemium APIs, SDKs, infrastructure and developer platforms for Web3 builders.",
+  path: "/apis",
+});
 
 type PageProps = {
   searchParams: Promise<{

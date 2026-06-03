@@ -217,6 +217,91 @@ export const ecosystemFeaturedProjects: Record<
       url: "https://monad.xyz",
     },
   ],
+  bitcoin: [
+    {
+      name: "Lightning Network",
+      description: "Instant Bitcoin payments over payment channels.",
+      url: "https://lightning.network",
+    },
+    {
+      name: "Stacks",
+      description: "Smart contracts secured by Bitcoin settlement.",
+      url: "https://www.stacks.co",
+    },
+    {
+      name: "Alby",
+      description: "Lightning wallet and API for web monetization.",
+      url: "https://getalby.com",
+    },
+  ],
+  cosmos: [
+    {
+      name: "Cosmos Hub",
+      description: "Interchain security and IBC coordination.",
+      url: "https://cosmos.network",
+    },
+    {
+      name: "Osmosis",
+      description: "DEX and liquidity hub in the Cosmos ecosystem.",
+      url: "https://osmosis.zone",
+    },
+    {
+      name: "dYdX Chain",
+      description: "Perps chain built with Cosmos SDK.",
+      url: "https://dydx.exchange",
+    },
+  ],
+  ton: [
+    {
+      name: "TON Foundation",
+      description: "Core network and developer programs.",
+      url: "https://ton.org",
+    },
+    {
+      name: "Telegram Mini Apps",
+      description: "Distribute apps inside Telegram with TON payments.",
+      url: "https://core.telegram.org/bots/webapps",
+    },
+    {
+      name: "TON Connect",
+      description: "Wallet connection standard for TON dapps.",
+      url: "https://docs.ton.org/develop/dapps/ton-connect",
+    },
+  ],
+  "multi-chain": [
+    {
+      name: "LayerZero",
+      description: "Omnichain messaging and bridging.",
+      url: "https://layerzero.network",
+    },
+    {
+      name: "Wormhole",
+      description: "Cross-chain token and data transfers.",
+      url: "https://wormhole.com",
+    },
+    {
+      name: "Axelar",
+      description: "Cross-chain gateway and GMP.",
+      url: "https://axelar.network",
+    },
+  ],
+  "chain-agnostic": [
+    {
+      name: "Privy",
+      description: "Wallet auth across chains and embedded wallets.",
+      url: "https://www.privy.io",
+    },
+    {
+      name: "Supabase",
+      description: "Backend and auth for Web3 app data.",
+      url: "https://supabase.com",
+    },
+    {
+      name: "Immunefi",
+      description: "Bug bounty platform for protocols.",
+      url: "https://immunefi.com",
+    },
+  ],
 };
 
 export const ecosystemResources: Record<string, EcosystemResource[]> = {
@@ -291,6 +376,34 @@ export const ecosystemResources: Record<string, EcosystemResource[]> = {
     { label: "Developer Portal", url: "https://monad.xyz/developers" },
     { label: "Monad GitHub", url: "https://github.com/monad-xyz" },
     { label: "Testnet Faucet", url: "https://monad.xyz" },
+  ],
+  bitcoin: [
+    { label: "Bitcoin Developer", url: "https://developer.bitcoin.org" },
+    { label: "Lightning Docs", url: "https://docs.lightning.engineering" },
+    { label: "Stacks Docs", url: "https://docs.stacks.co" },
+    { label: "Mempool Explorer", url: "https://mempool.space" },
+  ],
+  cosmos: [
+    { label: "Cosmos Docs", url: "https://docs.cosmos.network" },
+    { label: "CosmJS", url: "https://cosmos.github.io/cosmjs" },
+    { label: "IBC Docs", url: "https://ibc.cosmos.network" },
+    { label: "Cosmos GitHub", url: "https://github.com/cosmos" },
+  ],
+  ton: [
+    { label: "TON Docs", url: "https://docs.ton.org" },
+    { label: "Developer Hub", url: "https://ton.org/dev" },
+    { label: "TON GitHub", url: "https://github.com/ton-org" },
+    { label: "TON Explorer", url: "https://tonviewer.com" },
+  ],
+  "multi-chain": [
+    { label: "L2BEAT Bridges", url: "https://l2beat.com/bridges" },
+    { label: "DefiLlama Bridges", url: "https://defillama.com/bridges" },
+    { label: "Chainlist", url: "https://chainlist.org" },
+  ],
+  "chain-agnostic": [
+    { label: "Web3Scout APIs", url: "/apis" },
+    { label: "Web3Scout Recipes", url: "/recipes" },
+    { label: "Submit a Tool", url: "/submit" },
   ],
 };
 

@@ -6,11 +6,14 @@ import { ToolsTable } from "@/components/tools/tools-table";
 import { ToolCard } from "@/components/tools/tool-card";
 import type { Category, Pricing } from "@/lib/constants";
 import { getTools } from "@/lib/tools";
+import { buildPageMetadata } from "@/lib/site-seo";
 
-export const metadata: Metadata = {
-  title: "Directory",
-  description: "Search and filter free, freemium, and open-source developer tools.",
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "Developer Tools",
+  description:
+    "Search and filter free, freemium, and open-source developer tools for Web3 and general development.",
+  path: "/tools",
+});
 
 type PageProps = {
   searchParams: Promise<{

@@ -1,18 +1,18 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { ApiBuildPreview } from "@/components/apis/api-build-preview";
+import { ApiEcosystemBadges } from "@/components/apis/api-ecosystem-badges";
 import { ProjectLogo } from "@/components/discover/project-logo";
 import { Badge } from "@/components/ui/badge";
 import type { ApiEntry } from "@/lib/api-directory";
-import { getApiCategoryLabel } from "@/lib/api-directory";
+import { formatApiCategoryWithTags } from "@/lib/api-directory";
 
 type ApiListRowProps = {
   api: ApiEntry;
 };
 
 export function ApiListRow({ api }: ApiListRowProps) {
-  const primaryCategory = api.categories[0];
-  const visibleTags = api.tags.slice(0, 4);
+  const categoryLine = formatApiCategoryWithTags(api.categories[0], api.tags);
 
   return (
     <article className="glass-card flex flex-col gap-4 rounded-lg p-4 sm:flex-row sm:items-center">
@@ -35,16 +35,12 @@ export function ApiListRow({ api }: ApiListRowProps) {
             {api.description}
           </p>
           <div className="mt-2 space-y-1">
-            {primaryCategory ? (
-              <p className="text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                {getApiCategoryLabel(primaryCategory)}
+            {categoryLine ? (
+              <p className="text-xs text-neutral-600 dark:text-neutral-400">
+                {categoryLine}
               </p>
             ) : null}
-            {visibleTags.length > 0 ? (
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                {visibleTags.join(" • ")}
-              </p>
-            ) : null}
+            <ApiEcosystemBadges ecosystems={api.ecosystems} />
             <ApiBuildPreview items={api.whatCanYouBuild} />
           </div>
           <div className="mt-2 flex flex-wrap gap-1.5">

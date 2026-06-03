@@ -44,7 +44,27 @@ export const loadApiCatalog = cache(async (): Promise<ApiEntry[]> => {
     return db.select({ slug: apis.slug }).from(apis);
   });
 
-  return mergeCatalogBySlugs(slugs, apiDirectory);
+  if (!slugs) return apiDirectory;
+
+  const bySlug = new Map(apiDirectory.map((item) => [item.slug, item]));
+  const seen = new Set<string>();
+  const ordered: ApiEntry[] = [];
+
+  for (const slug of slugs) {
+    const item = bySlug.get(slug);
+    if (item) {
+      ordered.push(item);
+      seen.add(slug);
+    }
+  }
+
+  for (const item of apiDirectory) {
+    if (!seen.has(item.slug)) {
+      ordered.push(item);
+    }
+  }
+
+  return ordered.length > 0 ? ordered : apiDirectory;
 });
 
 export const loadRecipeCatalog = cache(async (): Promise<RecipeEntry[]> => {
@@ -62,7 +82,27 @@ export const loadGrantCatalog = cache(async (): Promise<GrantEntry[]> => {
     return db.select({ slug: grants.slug }).from(grants);
   });
 
-  return mergeCatalogBySlugs(slugs, grantsDirectory);
+  if (!slugs) return grantsDirectory;
+
+  const bySlug = new Map(grantsDirectory.map((item) => [item.slug, item]));
+  const seen = new Set<string>();
+  const ordered: GrantEntry[] = [];
+
+  for (const slug of slugs) {
+    const item = bySlug.get(slug);
+    if (item) {
+      ordered.push(item);
+      seen.add(slug);
+    }
+  }
+
+  for (const item of grantsDirectory) {
+    if (!seen.has(item.slug)) {
+      ordered.push(item);
+    }
+  }
+
+  return ordered.length > 0 ? ordered : grantsDirectory;
 });
 
 export const loadIdeaCatalog = cache(async (): Promise<IdeaEntry[]> => {
@@ -71,5 +111,25 @@ export const loadIdeaCatalog = cache(async (): Promise<IdeaEntry[]> => {
     return db.select({ slug: ideas.slug }).from(ideas);
   });
 
-  return mergeCatalogBySlugs(slugs, ideasDirectory);
+  if (!slugs) return ideasDirectory;
+
+  const bySlug = new Map(ideasDirectory.map((item) => [item.slug, item]));
+  const seen = new Set<string>();
+  const ordered: IdeaEntry[] = [];
+
+  for (const slug of slugs) {
+    const item = bySlug.get(slug);
+    if (item) {
+      ordered.push(item);
+      seen.add(slug);
+    }
+  }
+
+  for (const item of ideasDirectory) {
+    if (!seen.has(item.slug)) {
+      ordered.push(item);
+    }
+  }
+
+  return ordered.length > 0 ? ordered : ideasDirectory;
 });

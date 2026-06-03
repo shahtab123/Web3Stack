@@ -24,6 +24,7 @@ import {
   getRelatedRecipesForGrant,
   grantsDirectory,
 } from "@/lib/grants-directory";
+import { buildDetailMetadata } from "@/lib/site-seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -39,10 +40,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!grant) return { title: "Opportunity not found" };
 
-  return {
+  return buildDetailMetadata({
     title: grant.name,
     description: grant.description,
-  };
+    path: `/grants/${grant.slug}`,
+  });
 }
 
 export default async function GrantDetailPage({ params }: PageProps) {
@@ -95,18 +97,22 @@ export default async function GrantDetailPage({ params }: PageProps) {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Button asChild size="sm">
-            <a href={grant.applyUrl} target="_blank" rel="noopener noreferrer">
-              Apply
-              <ArrowUpRight className="size-4" />
-            </a>
-          </Button>
-          <Button asChild variant="outline" size="sm">
-            <a href={grant.websiteUrl} target="_blank" rel="noopener noreferrer">
-              Official Website
-              <ArrowUpRight className="size-4" />
-            </a>
-          </Button>
+          {grant.applyUrl ? (
+            <Button asChild size="sm">
+              <a href={grant.applyUrl} target="_blank" rel="noopener noreferrer">
+                Apply
+                <ArrowUpRight className="size-4" />
+              </a>
+            </Button>
+          ) : null}
+          {grant.websiteUrl ? (
+            <Button asChild variant="outline" size="sm">
+              <a href={grant.websiteUrl} target="_blank" rel="noopener noreferrer">
+                Official Website
+                <ArrowUpRight className="size-4" />
+              </a>
+            </Button>
+          ) : null}
         </div>
       </header>
 

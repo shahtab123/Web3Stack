@@ -24,6 +24,7 @@ import {
   getRecipesForBrowseEcosystem,
   getResourcesForBrowseEcosystem,
 } from "@/lib/browse-ecosystems";
+import { buildDetailMetadata } from "@/lib/site-seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -41,10 +42,11 @@ export async function generateMetadata({
 
   if (!ecosystem) return { title: "Ecosystem not found" };
 
-  return {
+  return buildDetailMetadata({
     title: ecosystem.name,
     description: getEcosystemPortalSubtitle(ecosystem.name),
-  };
+    path: `/ecosystems/${ecosystem.slug}`,
+  });
 }
 
 export default async function EcosystemDetailPage({ params }: PageProps) {

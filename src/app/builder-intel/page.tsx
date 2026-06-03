@@ -4,12 +4,14 @@ import { IntelEmbedScripts } from "@/components/builder-intel/intel-embed-script
 import { IntelFilterBar } from "@/components/builder-intel/intel-filter-bar";
 import { IntelPostCard } from "@/components/builder-intel/intel-post-card";
 import { getIntelPosts, type IntelFilter } from "@/lib/intel-posts";
+import { buildPageMetadata } from "@/lib/site-seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Builder Intel",
   description:
-    "Curated embedded posts — APIs, grants, hackathons, startup ideas and builder resources from across the internet.",
-};
+    "Curated posts from X, Reddit and more — APIs, grants, hackathons, startup ideas and builder resources.",
+  path: "/builder-intel",
+});
 
 type PageProps = {
   searchParams: Promise<{
