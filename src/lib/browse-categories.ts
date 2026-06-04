@@ -45,7 +45,7 @@ export const BROWSE_CATEGORIES: BrowseCategory[] = [
     apiCategories: ["payments", "banking"],
     recipeCategories: ["payments"],
     ecosystems: ["Chain-agnostic", "Ethereum", "Base"],
-    featuredApiSlugs: ["stripe", "plaid", "circle", "marble"],
+    featuredApiSlugs: ["stripe", "circle", "privy", "transak"],
     relatedCategorySlugs: ["cards", "compliance", "wallets"],
   },
   {
@@ -60,7 +60,7 @@ export const BROWSE_CATEGORIES: BrowseCategory[] = [
     apiCategories: ["cards"],
     recipeCategories: ["cards"],
     ecosystems: ["Chain-agnostic", "Multi-chain"],
-    featuredApiSlugs: ["marble", "rain", "circle", "stripe"],
+    featuredApiSlugs: ["circle", "stripe", "privy", "request-network"],
     relatedCategorySlugs: ["payments", "compliance", "wallets"],
   },
   {
@@ -119,7 +119,7 @@ export const BROWSE_CATEGORIES: BrowseCategory[] = [
     apiCategories: ["analytics", "data"],
     recipeCategories: ["trading", "analytics"],
     ecosystems: ["Ethereum", "Multi-chain", "Hyperliquid"],
-    featuredApiSlugs: ["dune", "the-graph", "pyth", "chainalysis"],
+    featuredApiSlugs: ["dune", "the-graph", "pyth", "defined-fi"],
     relatedCategorySlugs: ["trading", "infrastructure", "compliance"],
   },
   {
@@ -147,7 +147,7 @@ export const BROWSE_CATEGORIES: BrowseCategory[] = [
     apiCategories: ["security", "bug-bounty"],
     recipeCategories: ["infrastructure"],
     ecosystems: ["Ethereum", "Multi-chain"],
-    featuredApiSlugs: ["immunefi", "chainalysis"],
+    featuredApiSlugs: ["immunefi", "alchemy", "openzeppelin"],
     relatedCategorySlugs: ["compliance", "infrastructure", "wallets"],
   },
   {
@@ -189,7 +189,7 @@ export const BROWSE_CATEGORIES: BrowseCategory[] = [
     apiCategories: ["compliance"],
     recipeCategories: ["payments", "infrastructure"],
     ecosystems: ["Chain-agnostic", "Ethereum"],
-    featuredApiSlugs: ["chainalysis", "plaid", "stripe"],
+    featuredApiSlugs: ["stripe", "circle", "privy", "gitcoin-passport"],
     relatedCategorySlugs: ["payments", "security", "identity"],
   },
 ];

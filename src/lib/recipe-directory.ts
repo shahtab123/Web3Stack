@@ -42,6 +42,13 @@ const RECIPE_SLUG_ALIASES: Record<string, string> = {
   "alchemy-account-abstraction-starter": "onchain-commerce-shop",
   "solana-wallet-starter": "solana-pay-store",
   "sui-move-starter": "sui-kiosk-marketplace",
+  "gno": "gno-smart-contracts",
+  "intentkit": "intentkit-agent-cluster",
+  "hyper-alpha-arena": "hyper-alpha-arena",
+  "polymarket-bot": "polymarket-trading-bot",
+  "dapp-starter": "dapp-starter-jellydn",
+  "turbo-eth-template": "turbo-eth-web3-app",
+  "flow-telegram": "flow-telegram-quickstarts",
 };
 
 function recipeSortScore(recipe: RecipeEntry) {

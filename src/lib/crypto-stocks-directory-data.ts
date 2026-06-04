@@ -518,7 +518,7 @@ export const cryptoStocksDirectory = [
         type: "api",
       },
     ],
-    relatedApiSlugs: ["circle", "stripe", "plaid"],
+    relatedApiSlugs: ["circle", "stripe", "privy"],
     relatedEcosystemSlugs: ["base", "ethereum"],
     relatedRecipeSlugs: ["crypto-neobank", "payroll-app"],
     relatedTickers: ["block", "pypl"],

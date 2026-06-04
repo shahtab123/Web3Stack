@@ -1,11 +1,13 @@
 "use client";
 
 import Script from "next/script";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 type GitHubEmbedProps = {
   url: string;
   compact?: boolean;
+  eager?: boolean;
+  onReady?: () => void;
 };
 
 function parseGistUrl(url: string) {
@@ -14,7 +16,12 @@ function parseGistUrl(url: string) {
   return `${match[1]}/${match[2]}`;
 }
 
-export function GitHubEmbed({ url, compact = false }: GitHubEmbedProps) {
+export function GitHubEmbed({
+  url,
+  compact = false,
+  eager = false,
+  onReady,
+}: GitHubEmbedProps) {
   const gist = useMemo(() => parseGistUrl(url), [url]);
   const isDiscussion = url.includes("/discussions/");
 
@@ -27,7 +34,11 @@ export function GitHubEmbed({ url, compact = false }: GitHubEmbedProps) {
             : "gist-embed w-full overflow-auto"
         }
       >
-        <Script src={`https://gist.github.com/${gist}.js`} strategy="lazyOnload" />
+        <Script
+          src={`https://gist.github.com/${gist}.js`}
+          strategy={eager ? "afterInteractive" : "lazyOnload"}
+          onLoad={() => onReady?.()}
+        />
       </div>
     );
   }
@@ -43,12 +54,27 @@ export function GitHubEmbed({ url, compact = false }: GitHubEmbedProps) {
               ? "h-[220px] w-full border-0 bg-white"
               : "min-h-[480px] w-full border-0 bg-white"
           }
-          loading="lazy"
+          loading={eager ? "eager" : "lazy"}
+          onLoad={() => onReady?.()}
           sandbox="allow-scripts allow-same-origin allow-popups"
         />
       </div>
     );
   }
+
+  return <GitHubLinkFallback url={url} onReady={onReady} />;
+}
+
+function GitHubLinkFallback({
+  url,
+  onReady,
+}: {
+  url: string;
+  onReady?: () => void;
+}) {
+  useEffect(() => {
+    onReady?.();
+  }, [onReady]);
 
   return (
     <div className="w-full overflow-hidden rounded-md border border-neutral-100 p-4 dark:border-neutral-900">

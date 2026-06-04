@@ -1,13 +1,11 @@
 const LOGO_OVERRIDES: Record<string, string> = {
   privy: "privy.io",
   hyperliquid: "hyperliquid.xyz",
-  rain: "rain.xyz",
   circle: "circle.com",
   alchemy: "alchemy.com",
   immunefi: "immunefi.com",
   pyth: "pyth.network",
   stripe: "stripe.com",
-  plaid: "plaid.com",
   telegram: "telegram.org",
   ollama: "ollama.com",
   walletconnect: "walletconnect.com",
@@ -46,6 +44,10 @@ const LOGO_OVERRIDES: Record<string, string> = {
   "multi-chain": "ethereum.org",
   starknet: "starknet.io",
   eigenlayer: "eigenlayer.xyz",
+  gno: "gno.land",
+  polymarket: "polymarket.com",
+  intentkit: "intentcat.com",
+  flow: "flow.com",
 };
 
 function domainFromUrl(url: string) {

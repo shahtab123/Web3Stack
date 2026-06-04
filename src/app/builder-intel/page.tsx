@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { IntelEmbedScripts } from "@/components/builder-intel/intel-embed-scripts";
 import { IntelFilterBar } from "@/components/builder-intel/intel-filter-bar";
-import { IntelPostCard } from "@/components/builder-intel/intel-post-card";
-import { getIntelPosts, type IntelFilter } from "@/lib/intel-posts";
+import { IntelGallerySection } from "@/components/builder-intel/intel-gallery-section";
+import { IntelSectionLoader } from "@/components/builder-intel/intel-section-loader";
+import type { IntelFilter } from "@/lib/intel-posts";
 import { buildPageMetadata } from "@/lib/site-seo";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -23,10 +23,11 @@ type PageProps = {
 export default async function BuilderIntelPage({ searchParams }: PageProps) {
   const params = await searchParams;
 
-  const posts = await getIntelPosts({
+  const intelFilters = {
     q: params.q,
     filter: (params.filter as IntelFilter) ?? "all",
-  });
+  };
+  const listResetKey = JSON.stringify(intelFilters);
 
   return (
     <div className="mx-auto w-full max-w-[1100px] space-y-10">
@@ -48,21 +49,14 @@ export default async function BuilderIntelPage({ searchParams }: PageProps) {
         <IntelFilterBar />
       </Suspense>
 
-      {posts.length === 0 ? (
-        <div className="rounded-lg border border-dashed border-neutral-300 py-20 text-center dark:border-neutral-700">
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
-            No bookmarks match your filters.
-          </p>
-        </div>
-      ) : (
-        <div className="columns-1 gap-6 md:columns-2 xl:columns-3">
-          {posts.map((post) => (
-            <IntelPostCard key={post.id} post={post} />
-          ))}
-        </div>
-      )}
-
-      <IntelEmbedScripts />
+      <Suspense
+        key={listResetKey}
+        fallback={
+          <IntelSectionLoader label="Loading posts…" className="min-h-[50vh]" />
+        }
+      >
+        <IntelGallerySection filters={intelFilters} resetKey={listResetKey} />
+      </Suspense>
     </div>
   );
 }

@@ -15,7 +15,6 @@ export function ExplorerSection() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
-  const [shortcutLabel, setShortcutLabel] = useState("Ctrl K");
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -29,11 +28,6 @@ export function ExplorerSection() {
 
     return () => clearInterval(interval);
   }, [reduceMotion]);
-
-  useEffect(() => {
-    const isMac = navigator.platform.toUpperCase().includes("MAC");
-    setShortcutLabel(isMac ? "⌘K" : "Ctrl K");
-  }, []);
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -111,13 +105,13 @@ export function ExplorerSection() {
 
           <div
             className={cn(
-              "relative flex items-center gap-3 rounded-2xl border border-border bg-background px-4 py-3.5",
+              "relative flex h-11 items-center gap-2.5 rounded-xl border border-border bg-background px-3",
               "transition-[border-color,box-shadow] duration-200",
               "group-focus-within:border-foreground/15 group-focus-within:shadow-[0_0_0_1px_rgba(0,0,0,0.04)]",
               "dark:group-focus-within:shadow-[0_0_0_1px_rgba(255,255,255,0.06)]",
             )}
           >
-            <Search className="size-5 shrink-0 text-muted" aria-hidden />
+            <Search className="size-4 shrink-0 text-muted" aria-hidden />
 
             <input
               ref={inputRef}
@@ -127,18 +121,11 @@ export function ExplorerSection() {
               onChange={(event) => setQuery(event.target.value)}
               placeholder={placeholder}
               className={cn(
-                "min-h-[44px] w-full flex-1 bg-transparent text-base text-foreground",
+                "h-full w-full flex-1 bg-transparent text-sm text-foreground",
                 "placeholder:text-muted-foreground",
                 "focus:outline-none",
               )}
             />
-
-            <kbd
-              className="hidden shrink-0 rounded-md border border-border px-2 py-1 text-[11px] font-medium text-muted sm:inline-flex"
-              aria-hidden
-            >
-              {shortcutLabel}
-            </kbd>
           </div>
         </form>
 

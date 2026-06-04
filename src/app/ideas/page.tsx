@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { IdeaCard } from "@/components/ideas/idea-card";
+import { IdeaGalleryGrid } from "@/components/ideas/idea-gallery-grid";
 import { IdeaFilters } from "@/components/ideas/idea-filters";
 import { PageHeader } from "@/components/layout/page-header";
 import { getIdeas } from "@/lib/ideas-directory";
@@ -27,6 +27,7 @@ export default async function IdeasPage({ searchParams }: PageProps) {
     filter: params.filter,
   };
   const ideas = await getIdeas(filters);
+  const listResetKey = JSON.stringify(filters);
 
   return (
     <div className="mx-auto w-full max-w-[1200px] space-y-10">
@@ -50,11 +51,7 @@ export default async function IdeasPage({ searchParams }: PageProps) {
           </p>
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {ideas.map((idea) => (
-            <IdeaCard key={idea.slug} idea={idea} />
-          ))}
-        </div>
+        <IdeaGalleryGrid ideas={ideas} resetKey={listResetKey} />
       )}
     </div>
   );

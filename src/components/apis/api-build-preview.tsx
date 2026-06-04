@@ -26,7 +26,6 @@ export function ApiBuildPreview({ items, max = 2 }: ApiBuildPreviewProps) {
             className="pl-3.5 text-neutral-400 dark:text-neutral-500"
             aria-hidden
           >
-            ......
           </li>
         ) : null}
       </ul>

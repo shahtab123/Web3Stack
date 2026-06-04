@@ -20,7 +20,7 @@ export function IntelEmbedScripts() {
   return (
     <Script
       src="https://platform.x.com/widgets.js"
-      strategy="lazyOnload"
+      strategy="afterInteractive"
       onLoad={() => window.twttr?.widgets?.load()}
     />
   );

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { RecipeFilters } from "@/components/recipes/recipe-filters";
-import { RecipeGalleryCard } from "@/components/recipes/recipe-gallery-card";
+import { RecipeGalleryGrid } from "@/components/recipes/recipe-gallery-grid";
 import {
   getRecipes,
   type RecipeCategory,
@@ -59,6 +59,7 @@ export default async function RecipesPage({ searchParams }: PageProps) {
   };
 
   const recipes = await getRecipes(filters);
+  const listResetKey = JSON.stringify(filters);
 
   return (
     <div className="space-y-10">
@@ -91,11 +92,7 @@ export default async function RecipesPage({ searchParams }: PageProps) {
           </p>
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {recipes.map((recipe) => (
-            <RecipeGalleryCard key={recipe.slug} recipe={recipe} />
-          ))}
-        </div>
+        <RecipeGalleryGrid recipes={recipes} resetKey={listResetKey} />
       )}
     </div>
   );

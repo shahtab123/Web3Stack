@@ -12,6 +12,8 @@ type PostEmbedProps = {
   postUrl: string;
   xHideConversation?: boolean;
   compact?: boolean;
+  eager?: boolean;
+  onReady?: () => void;
 };
 
 export function PostEmbed({
@@ -19,25 +21,29 @@ export function PostEmbed({
   postUrl,
   xHideConversation,
   compact = false,
+  eager = false,
+  onReady,
 }: PostEmbedProps) {
+  const shared = { compact, eager, onReady };
+
   switch (platform) {
     case "x":
       return (
         <XEmbed
           url={postUrl}
           hideConversation={xHideConversation}
-          compact={compact}
+          {...shared}
         />
       );
     case "farcaster":
-      return <FarcasterEmbed url={postUrl} compact={compact} />;
+      return <FarcasterEmbed url={postUrl} {...shared} />;
     case "reddit":
-      return <RedditEmbed url={postUrl} compact={compact} />;
+      return <RedditEmbed url={postUrl} {...shared} />;
     case "github":
-      return <GitHubEmbed url={postUrl} compact={compact} />;
+      return <GitHubEmbed url={postUrl} {...shared} />;
     case "blog":
-      return <BlogEmbed url={postUrl} compact={compact} />;
+      return <BlogEmbed url={postUrl} {...shared} />;
     default:
-      return <BlogEmbed url={postUrl} compact={compact} />;
+      return <BlogEmbed url={postUrl} {...shared} />;
   }
 }

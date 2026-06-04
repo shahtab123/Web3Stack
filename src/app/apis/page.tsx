@@ -62,9 +62,10 @@ export default async function ApisPage({ searchParams }: PageProps) {
   const apis = await getApis(filters);
   const featuredApis = await getFeaturedApisForHomepage();
   const showFeatured = !hasActiveApiFilters(filters);
+  const listResetKey = JSON.stringify(filters);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <Suspense
         fallback={
           <div className="h-32 animate-pulse rounded-lg bg-neutral-100 dark:bg-neutral-900" />
@@ -83,7 +84,7 @@ export default async function ApisPage({ searchParams }: PageProps) {
         {apis.length === 0 ? (
           <ApiDirectoryEmpty activeCategory={filters.category} />
         ) : (
-          <ApiDirectoryResults apis={apis} />
+          <ApiDirectoryResults apis={apis} resetKey={listResetKey} />
         )}
       </div>
     </div>

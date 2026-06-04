@@ -3,9 +3,34 @@
 import { REDDIT_EMBED_ALLOW } from "@/lib/embed-utils";
 import { useEffect, useRef, useState } from "react";
 
+function RedditLinkFallback({
+  url,
+  onReady,
+}: {
+  url: string;
+  onReady?: () => void;
+}) {
+  useEffect(() => {
+    onReady?.();
+  }, [onReady]);
+
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-sm text-neutral-600 underline dark:text-neutral-400"
+    >
+      View on Reddit
+    </a>
+  );
+}
+
 type RedditEmbedProps = {
   url: string;
   compact?: boolean;
+  eager?: boolean;
+  onReady?: () => void;
 };
 
 function toRedditEmbedUrl(url: string, theme: "light" | "dark" = "light"): string | null {
@@ -40,7 +65,12 @@ function getEmbedTheme(): "light" | "dark" {
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
-export function RedditEmbed({ url, compact = false }: RedditEmbedProps) {
+export function RedditEmbed({
+  url,
+  compact = false,
+  eager = false,
+  onReady,
+}: RedditEmbedProps) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const embedUrl = toRedditEmbedUrl(url, theme);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -81,6 +111,7 @@ export function RedditEmbed({ url, compact = false }: RedditEmbedProps) {
         if (payload.type === "resize.embed" && typeof payload.data === "number") {
           const maxHeight = compact ? 220 : 700;
           setHeight(Math.min(Math.ceil(payload.data), maxHeight));
+          onReady?.();
         }
       } catch {
         // Ignore non-JSON postMessage payloads.
@@ -89,18 +120,11 @@ export function RedditEmbed({ url, compact = false }: RedditEmbedProps) {
 
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [compact]);
+  }, [compact, onReady]);
 
   if (!embedUrl) {
     return (
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-sm text-neutral-600 underline dark:text-neutral-400"
-      >
-        View on Reddit
-      </a>
+      <RedditLinkFallback url={url} onReady={onReady} />
     );
   }
 
@@ -115,7 +139,8 @@ export function RedditEmbed({ url, compact = false }: RedditEmbedProps) {
         height={height}
         scrolling="no"
         style={{ height: `${height}px` }}
-        loading="lazy"
+        loading={eager ? "eager" : "lazy"}
+        onLoad={() => onReady?.()}
         sandbox="allow-scripts allow-same-origin allow-popups"
         allow={REDDIT_EMBED_ALLOW}
       />

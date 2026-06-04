@@ -190,9 +190,50 @@ function SubmissionSuccess() {
 }
 
 function SubmissionForm({ onSuccess }: { onSuccess: () => void }) {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    onSuccess();
+    setError(null);
+    setSubmitting(true);
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          socialProfileUrl: data.get("socialProfileUrl"),
+          page: data.get("page"),
+          category: data.get("category"),
+          title: data.get("title"),
+          resourceUrl: data.get("resourceUrl"),
+          githubUrl: data.get("githubUrl"),
+          documentationUrl: data.get("documentationUrl"),
+          description: data.get("description"),
+          why: data.get("why"),
+        }),
+      });
+
+      const result = (await response.json()) as { ok?: boolean; error?: string };
+
+      if (!response.ok) {
+        setError(result.error ?? "Submission failed. Please try again.");
+        return;
+      }
+
+      form.reset();
+      onSuccess();
+    } catch {
+      setError("Network error. Check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -328,8 +369,19 @@ function SubmissionForm({ onSuccess }: { onSuccess: () => void }) {
         />
       </div>
 
-      <Button type="submit" size="lg" className="w-full sm:w-auto">
-        Submit Resource
+      {error ? (
+        <p className="text-sm text-red-600 dark:text-red-400" role="alert">
+          {error}
+        </p>
+      ) : null}
+
+      <Button
+        type="submit"
+        size="lg"
+        className="w-full sm:w-auto"
+        disabled={submitting}
+      >
+        {submitting ? "Sending…" : "Submit Resource"}
       </Button>
     </form>
   );

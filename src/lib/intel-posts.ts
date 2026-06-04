@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { desc } from "drizzle-orm";
 import { getDb, isDatabaseConfigured } from "@/db";
 import { intelPosts } from "@/db/schema";
@@ -79,11 +80,9 @@ function catalogEntryByUrl(url: string) {
   return intelPostsCatalog.find((entry) => entry.postUrl === url);
 }
 
-export async function getIntelPosts(
-  filters: IntelPostFilters = {},
-): Promise<IntelPostItem[]> {
+const loadIntelPosts = cache(async (): Promise<IntelPostItem[]> => {
   if (!isDatabaseConfigured()) {
-    return applyFilters(catalogToItems(), filters);
+    return catalogToItems();
   }
 
   try {
@@ -94,10 +93,10 @@ export async function getIntelPosts(
       .orderBy(desc(intelPosts.createdAt));
 
     if (rows.length === 0) {
-      return applyFilters(catalogToItems(), filters);
+      return catalogToItems();
     }
 
-    const items: IntelPostItem[] = rows.map((row) => {
+    return rows.map((row) => {
       const catalogEntry = catalogEntryByUrl(row.postUrl);
 
       return {
@@ -112,11 +111,15 @@ export async function getIntelPosts(
         xHideConversation: catalogEntry?.xHideConversation,
       };
     });
-
-    return applyFilters(items, filters);
   } catch {
-    return applyFilters(catalogToItems(), filters);
+    return catalogToItems();
   }
+});
+
+export async function getIntelPosts(
+  filters: IntelPostFilters = {},
+): Promise<IntelPostItem[]> {
+  return applyFilters(await loadIntelPosts(), filters);
 }
 
 /** Homepage preview — X and other embeds only; Reddit stays on /builder-intel. */

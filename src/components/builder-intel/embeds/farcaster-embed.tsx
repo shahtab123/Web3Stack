@@ -3,6 +3,8 @@
 type FarcasterEmbedProps = {
   url: string;
   compact?: boolean;
+  eager?: boolean;
+  onReady?: () => void;
 };
 
 function toFarcasterEmbedUrl(url: string) {
@@ -24,7 +26,12 @@ function toFarcasterEmbedUrl(url: string) {
   return url;
 }
 
-export function FarcasterEmbed({ url, compact = false }: FarcasterEmbedProps) {
+export function FarcasterEmbed({
+  url,
+  compact = false,
+  eager = false,
+  onReady,
+}: FarcasterEmbedProps) {
   const embedUrl = toFarcasterEmbedUrl(url);
 
   return (
@@ -37,7 +44,8 @@ export function FarcasterEmbed({ url, compact = false }: FarcasterEmbedProps) {
             ? "h-[220px] w-full border-0 bg-white"
             : "min-h-[420px] w-full border-0 bg-white"
         }
-        loading="lazy"
+        loading={eager ? "eager" : "lazy"}
+        onLoad={() => onReady?.()}
         sandbox="allow-scripts allow-same-origin allow-popups"
       />
     </div>

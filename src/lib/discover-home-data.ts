@@ -10,7 +10,6 @@ export const POPULAR_SEARCHES = [
   "Trading Platform",
   "Crypto Neobank",
   "Wallet Authentication",
-  "Card Issuing",
   "Stablecoin Payments",
   "Bug Bounty Platform",
 ] as const;

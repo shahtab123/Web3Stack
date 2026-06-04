@@ -76,9 +76,9 @@ function defaultRelatedApis(category: CryptoStockCategory) {
     case "exchanges":
       return ["privy", "alchemy", "walletconnect"];
     case "stablecoins-payments":
-      return ["stripe", "circle", "plaid"];
+      return ["stripe", "circle", "privy"];
     case "crypto-financial-services":
-      return ["chainalysis", "dune", "alchemy"];
+      return ["stripe", "circle", "dune"];
     case "infrastructure-blockchain":
       return ["alchemy", "pyth", "dune"];
     case "etfs":

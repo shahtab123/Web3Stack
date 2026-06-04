@@ -1,9 +1,13 @@
+"use client";
+
 import { PostEmbed } from "./post-embed";
 import type { IntelPostItem } from "@/lib/intel-posts";
 import { getPlatformLabel } from "@/lib/intel-posts";
 
 type IntelPostCardProps = {
   post: IntelPostItem;
+  eagerEmbed?: boolean;
+  onEmbedReady?: () => void;
 };
 
 function formatDateAdded(date: Date) {
@@ -14,7 +18,11 @@ function formatDateAdded(date: Date) {
   }).format(date);
 }
 
-export function IntelPostCard({ post }: IntelPostCardProps) {
+export function IntelPostCard({
+  post,
+  eagerEmbed = false,
+  onEmbedReady,
+}: IntelPostCardProps) {
   return (
     <article
       id={`post-${post.id}`}
@@ -36,6 +44,8 @@ export function IntelPostCard({ post }: IntelPostCardProps) {
         platform={post.platform}
         postUrl={post.postUrl}
         xHideConversation={post.xHideConversation}
+        eager={eagerEmbed}
+        onReady={onEmbedReady}
       />
     </article>
   );

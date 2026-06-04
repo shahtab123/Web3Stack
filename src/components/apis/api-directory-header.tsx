@@ -39,7 +39,7 @@ export function ApiDirectoryHeader() {
   }, [query, router, searchParams]);
 
   return (
-    <div className="space-y-2 pb-6">
+    <div className="space-y-2 pb-2">
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
           APIs & Developer Tools
@@ -52,7 +52,7 @@ export function ApiDirectoryHeader() {
 
       <div
         className={cn(
-          "sticky top-20 z-30 -mx-4 border-b border-transparent bg-background/95 px-4 py-3 backdrop-blur-md",
+          "sticky top-20 z-30 -mx-4 border-b border-transparent bg-background/95 px-4 py-2 backdrop-blur-md",
           "sm:-mx-6 sm:px-6",
         )}
       >

@@ -3,9 +3,16 @@
 type BlogEmbedProps = {
   url: string;
   compact?: boolean;
+  eager?: boolean;
+  onReady?: () => void;
 };
 
-export function BlogEmbed({ url, compact = false }: BlogEmbedProps) {
+export function BlogEmbed({
+  url,
+  compact = false,
+  eager = false,
+  onReady,
+}: BlogEmbedProps) {
   return (
     <div className="w-full overflow-hidden rounded-md border border-neutral-100 dark:border-neutral-900">
       <iframe
@@ -16,7 +23,8 @@ export function BlogEmbed({ url, compact = false }: BlogEmbedProps) {
             ? "h-[220px] w-full border-0 bg-white"
             : "min-h-[520px] w-full border-0 bg-white"
         }
-        loading="lazy"
+        loading={eager ? "eager" : "lazy"}
+        onLoad={() => onReady?.()}
         sandbox="allow-scripts allow-same-origin allow-popups"
       />
       {!compact && (
