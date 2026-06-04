@@ -91,6 +91,12 @@ export default async function EcosystemDetailPage({ params }: PageProps) {
         </p>
       </CategorySection>
 
+      {resources.length > 0 ? (
+        <CategorySection id="resources" title="Resources">
+          <ResourceLinkList resources={resources} />
+        </CategorySection>
+      ) : null}
+
       <CategorySection
         id="apis"
         title="Featured APIs"
@@ -115,9 +121,9 @@ export default async function EcosystemDetailPage({ params }: PageProps) {
             No build recipes linked to this ecosystem yet.
           </p>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {recipes.map((recipe) => (
-              <RecipeCard key={recipe.slug} recipe={recipe} />
+              <RecipeCard key={recipe.slug} recipe={recipe} compact />
             ))}
           </div>
         )}
@@ -170,15 +176,6 @@ export default async function EcosystemDetailPage({ params }: PageProps) {
         )}
       </CategorySection>
 
-      <CategorySection id="resources" title="Resources">
-        {resources.length === 0 ? (
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
-            No official resources listed yet.
-          </p>
-        ) : (
-          <ResourceLinkList resources={resources} />
-        )}
-      </CategorySection>
 
       <IntelEmbedScripts />
     </div>

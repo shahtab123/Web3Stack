@@ -3,8 +3,9 @@ import { RecipeGalleryCard } from "@/components/recipes/recipe-gallery-card";
 
 type RecipeCardProps = {
   recipe: RecipeEntry;
+  compact?: boolean;
 };
 
-export function RecipeCard({ recipe }: RecipeCardProps) {
-  return <RecipeGalleryCard recipe={recipe} />;
+export function RecipeCard({ recipe, compact }: RecipeCardProps) {
+  return <RecipeGalleryCard recipe={recipe} compact={compact} />;
 }

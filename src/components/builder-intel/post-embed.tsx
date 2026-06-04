@@ -6,6 +6,7 @@ import { FarcasterEmbed } from "./embeds/farcaster-embed";
 import { GitHubEmbed } from "./embeds/github-embed";
 import { RedditEmbed } from "./embeds/reddit-embed";
 import { XEmbed } from "./embeds/x-embed";
+import { YouTubeEmbed } from "./embeds/youtube-embed";
 
 type PostEmbedProps = {
   platform: IntelPlatform;
@@ -35,6 +36,8 @@ export function PostEmbed({
           {...shared}
         />
       );
+    case "youtube":
+      return <YouTubeEmbed url={postUrl} {...shared} />;
     case "farcaster":
       return <FarcasterEmbed url={postUrl} {...shared} />;
     case "reddit":

@@ -11,14 +11,12 @@ import {
   RecipeDetailHero,
   RecipeLinkList,
   RecipeMetaBadges,
-  RecipeRelatedGrid,
   RecipeScreenshotGallery,
   RecipeVideoEmbed,
 } from "@/components/recipes/recipe-detail-sections";
 import { getRecipeScreenshots } from "@/lib/recipe-helpers";
 import {
   getRecipeBySlug,
-  getRelatedRecipes,
   recipeDirectory,
 } from "@/lib/recipe-directory";
 import { buildDetailMetadata } from "@/lib/site-seo";
@@ -50,7 +48,6 @@ export default async function RecipeDetailPage({ params }: PageProps) {
 
   if (!recipe) notFound();
 
-  const relatedRecipes = await getRelatedRecipes(recipe, 4);
   const screenshots = getRecipeScreenshots(recipe);
 
   return (
@@ -106,9 +103,6 @@ export default async function RecipeDetailPage({ params }: PageProps) {
         </DetailSection>
       ) : null}
 
-      <DetailSection title="Related Recipes">
-        <RecipeRelatedGrid recipes={relatedRecipes} />
-      </DetailSection>
     </div>
   );
 }

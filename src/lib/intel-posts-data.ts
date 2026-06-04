@@ -3,6 +3,24 @@ import type { IntelPostCatalogEntry } from "./intel-posts-types";
 /** Curated bookmark collection — URLs only, no rewritten content. */
 export const intelPostsCatalog: IntelPostCatalogEntry[] = [
   {
+    platform: "youtube",
+    postUrl: "https://www.youtube.com/watch?v=z-u7eO25N2Y",
+    topics: ["startup-ideas"],
+    createdAt: "2026-06-04T16:00:00Z",
+  },
+  {
+    platform: "youtube",
+    postUrl: "https://www.youtube.com/watch?v=BHLIJnS5Ikw",
+    topics: ["startup-ideas", "apis"],
+    createdAt: "2026-06-04T14:00:00Z",
+  },
+  {
+    platform: "youtube",
+    postUrl: "https://www.youtube.com/watch?v=2pcm7ICRJKU",
+    topics: ["infrastructure", "apis"],
+    createdAt: "2026-06-04T12:00:00Z",
+  },
+  {
     platform: "x",
     postUrl: "https://x.com/freeCodeCamp/status/2062263360586944853",
     topics: ["apis"],

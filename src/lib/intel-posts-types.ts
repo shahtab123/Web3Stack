@@ -1,5 +1,6 @@
 export const INTEL_PLATFORMS = [
   { slug: "x", label: "X" },
+  { slug: "youtube", label: "YouTube" },
   { slug: "farcaster", label: "Farcaster" },
   { slug: "reddit", label: "Reddit" },
   { slug: "github", label: "GitHub" },
@@ -53,5 +54,12 @@ export function detectPlatformFromUrl(url: string): IntelPlatform {
   if (lower.includes("reddit.com")) return "reddit";
   if (lower.includes("github.com") || lower.includes("gist.github.com"))
     return "github";
+  if (
+    lower.includes("youtube.com") ||
+    lower.includes("youtu.be") ||
+    lower.includes("youtube-nocookie.com")
+  ) {
+    return "youtube";
+  }
   return "blog";
 }

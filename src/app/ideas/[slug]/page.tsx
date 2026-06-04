@@ -6,7 +6,6 @@ import { ApiGridCard } from "@/components/categories/api-grid-card";
 import { CategorySection } from "@/components/categories/category-section";
 import { IdeaCompactCard } from "@/components/ideas/idea-card";
 import { PageHeader } from "@/components/layout/page-header";
-import { RecipeCard } from "@/components/recipes/recipe-card";
 import { Badge } from "@/components/ui/badge";
 import {
   getIdeaBySlug,
@@ -14,7 +13,6 @@ import {
   getIdeaDifficultyLabel,
   getIdeaGroupLabel,
   getRelatedIdeasForIdea,
-  getRelatedRecipesForIdea,
   getSuggestedApisForIdea,
   getSuggestedEcosystemsForIdea,
   ideasDirectory,
@@ -54,7 +52,6 @@ export default async function IdeaDetailPage({ params }: PageProps) {
 
   const suggestedApis = getSuggestedApisForIdea(idea);
   const suggestedEcosystems = getSuggestedEcosystemsForIdea(idea);
-  const relatedRecipes = getRelatedRecipesForIdea(idea);
   const relatedIdeas = getRelatedIdeasForIdea(idea);
 
   return (
@@ -141,20 +138,6 @@ export default async function IdeaDetailPage({ params }: PageProps) {
                   {ecosystem.description}
                 </p>
               </Link>
-            ))}
-          </div>
-        )}
-      </CategorySection>
-
-      <CategorySection title="Related Recipes" href="/recipes">
-        {relatedRecipes.length === 0 ? (
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
-            No related recipes listed.
-          </p>
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-2">
-            {relatedRecipes.map((recipe) => (
-              <RecipeCard key={recipe.slug} recipe={recipe} />
             ))}
           </div>
         )}

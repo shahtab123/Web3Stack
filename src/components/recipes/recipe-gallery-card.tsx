@@ -14,9 +14,72 @@ import { cn } from "@/lib/utils";
 type RecipeGalleryCardProps = {
   recipe: RecipeEntry;
   className?: string;
+  compact?: boolean;
 };
 
-export function RecipeGalleryCard({ recipe, className }: RecipeGalleryCardProps) {
+export function RecipeGalleryCard({ recipe, className, compact }: RecipeGalleryCardProps) {
+  if (compact) {
+    return (
+      <article
+        className={cn(
+          "glass-card group flex h-full flex-col overflow-hidden rounded-xl",
+          className,
+        )}
+      >
+        <div className="flex flex-1 flex-col p-3">
+          <div className="flex items-center gap-2">
+            <ProjectLogo
+              slug={recipe.logoSlug ?? recipe.slug}
+              name={recipe.name}
+              websiteUrl={recipe.docsUrl ?? recipe.sourceUrl}
+              size={22}
+              className="shrink-0"
+            />
+            <Link
+              href={`/recipes/${recipe.slug}`}
+              className="truncate text-sm font-semibold text-neutral-950 hover:underline dark:text-neutral-50"
+            >
+              {recipe.name}
+            </Link>
+          </div>
+
+          <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+            {recipe.description}
+          </p>
+
+          <div className="mt-2 flex flex-wrap gap-1">
+            {recipe.ecosystems.slice(0, 3).map((ecosystem) => (
+              <span
+                key={ecosystem}
+                className="rounded-full border border-neutral-200 px-2 py-0.5 text-[10px] text-neutral-600 dark:border-neutral-800 dark:text-neutral-400"
+              >
+                {ecosystem}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-auto flex gap-2 pt-3">
+            <Link
+              href={`/recipes/${recipe.slug}`}
+              className="glass-card-action inline-flex flex-1 items-center justify-center rounded-md px-2 py-1.5 text-xs font-medium"
+            >
+              View
+            </Link>
+            <a
+              href={recipe.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-card-action inline-flex items-center justify-center gap-1 rounded-md px-2 py-1.5 text-xs font-medium"
+            >
+              Source
+              <ArrowUpRight className="size-3 text-neutral-400" />
+            </a>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   return (
     <article
       className={cn(
